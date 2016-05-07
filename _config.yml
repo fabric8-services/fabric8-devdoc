@@ -1,0 +1,11 @@
+# jekyll configuration
+
+title: "ALMighty-devdoc"
+
+asciidoctor:
+  attributes:
+    - idseparator=_
+    - source-highlighter=coderay
+    - icons=font
+
+# end of configuration
