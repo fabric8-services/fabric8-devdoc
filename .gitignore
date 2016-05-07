@@ -4,3 +4,5 @@
 /tmp/
 *.bundle
 Gemfile.lock
+*.png
+*.cache
