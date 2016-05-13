@@ -28,7 +28,7 @@
             <h5>Blueprints</h5>
 
             {% for blueprint in site.blueprints %}
-                <a href="{{blueprint.url}}">{{blueprint.title}}</a><br/>
+                <a href="{{base}}{{blueprint.url}}">{{blueprint.title}}</a><br/>
             {% endfor %}
         </div>
 
@@ -38,3 +38,5 @@
 </div>
 
 <!-- End Main Content and Sidebar -->
+
+{% include footer.html %}
