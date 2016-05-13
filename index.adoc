@@ -4,14 +4,10 @@
 
 Initial site content.
 
-=== Ok?
-
-sddsf
-
 [ditaa]
 ----
                    +-------------+
-                   | Asciidoctor |-------+
+                   |             |-------+
                    |  Diagram    |       |
                    +-------------+       | PNG out
                        ^                 |
