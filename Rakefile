@@ -80,5 +80,15 @@ end
 # This task builds the Jekyll site and deploys it to a remote Git repository.
 # It's preconfigured to be used with GitHub and Travis CI.
 # See http://github.com/jirutka/rake-jekyll for more options.
-Rake::Jekyll::GitDeployTask.new(:deploy)
+Rake::Jekyll::GitDeployTask.new(:deploy)  do |t|
+
+  # Run this command to build the site.
+  # We need to run build twice due to odd thing with Asciidoc-Diagram
+  t.build_script = ->(dest_dir) {
+    puts "\nRunning Jekyll..."
+    Rake.sh "bundle exec jekyll build --destination #{dest_dir}"
+    Rake.sh "bundle exec jekyll build --destination #{dest_dir}"
+  }
+
+end
 
