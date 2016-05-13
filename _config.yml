@@ -2,10 +2,21 @@
 
 title: "ALMighty-devdoc"
 
+collections:
+  blueprints:
+    output: true
+
 asciidoctor:
   attributes:
     - idseparator=_
     - source-highlighter=coderay
     - icons=font
 
+defaults:
+  - scope:
+      path: ""
+      type: blueprints
+    values:
+      layout: blueprint
+      
 # end of configuration
