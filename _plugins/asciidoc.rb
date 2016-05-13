@@ -22,10 +22,13 @@ module Jekyll
       highlighter_suffix "\n"
 
       def initialize(config)
-	    # Hack to get the output path of the current rendered doc
-		Jekyll::Hooks.register(:pages, :pre_render) do |page, payload|
-			@curr_page_output = page.dir
-		end
+        # Hack to get the output path of the current rendered doc
+        Jekyll::Hooks.register(:pages, :pre_render) do |page, payload|
+          @curr_page_output = page.dir
+        end
+        Jekyll::Hooks.register(:documents, :pre_render) do |page, payload|
+          @curr_page_output = page.collection.label
+        end
         @config = config
         config['asciidoc'] ||= 'asciidoctor'
         asciidoc_ext = (config['asciidoc_ext'] ||= 'asciidoc,adoc,ad')
@@ -76,10 +79,10 @@ module Jekyll
         setup
         case @config['asciidoc']
         when 'asciidoctor'
-	      config = @config['asciidoctor'].dup
-		  config[:attributes] = {}
-		  config[:attributes]["docdir"] = "./#{@curr_page_output}"
-		  
+          config = @config['asciidoctor'].dup
+          config[:attributes] = {}
+          config[:attributes]["imagesoutdir"] = "./_site/#{@curr_page_output}"
+
           Asciidoctor.convert(content, config)
         else
           warn 'Unknown AsciiDoc converter. Passing through raw content.'
