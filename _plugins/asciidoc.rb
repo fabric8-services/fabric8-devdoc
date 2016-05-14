@@ -25,9 +25,11 @@ module Jekyll
         # Hack to get the output path of the current rendered doc
         Jekyll::Hooks.register(:pages, :pre_render) do |page, payload|
           @curr_page_output = page.dir
+          @dest = page.site.dest
         end
         Jekyll::Hooks.register(:documents, :pre_render) do |page, payload|
           @curr_page_output = page.collection.label
+          @dest = page.site.dest
         end
         @config = config
         config['asciidoc'] ||= 'asciidoctor'
@@ -81,7 +83,7 @@ module Jekyll
         when 'asciidoctor'
           config = @config['asciidoctor'].dup
           config[:attributes] = {}
-          config[:attributes]["imagesoutdir"] = "./_site/#{@curr_page_output}"
+          config[:attributes]["imagesoutdir"] = "#{@dest}/#{@curr_page_output}"
 
           Asciidoctor.convert(content, config)
         else
