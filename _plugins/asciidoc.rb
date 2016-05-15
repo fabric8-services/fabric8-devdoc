@@ -84,8 +84,8 @@ module Jekyll
           config = @config['asciidoctor'].dup
           config[:safe] = Asciidoctor::SafeMode::UNSAFE
           config[:attributes] = {}
-          config[:attributes]["outdir"] = "#{@dest}"
-          config[:attributes]["imagesdir"] = "#{@curr_page_output}"
+          config[:attributes]["outdir"] = "#{@dest}/#{@curr_page_output}"
+          config[:attributes]["imagesdir"] = ""
 
           Asciidoctor.convert(content, config)
         else
