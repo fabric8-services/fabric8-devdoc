@@ -2,7 +2,6 @@
 <!-- Main Page Content and Sidebar -->
 
 <div class="row">
-
     <!-- Main Blog Content -->
     <div class="large-9 columns" role="content">
 
@@ -23,7 +22,9 @@
                 <a href="{{base}}{{blueprint.url}}">{{blueprint.title}}</a><br/>
             {% endfor %}
         </div>
-
+        <div class="right">
+            <a href="{{site.data.global.github_repo_http}}/edit/master/{{page.path}}">Edit</a>
+        </div>
     </aside>
 
     <!-- End Sidebar -->
