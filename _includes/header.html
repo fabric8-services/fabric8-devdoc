@@ -19,27 +19,29 @@
     <link rel="stylesheet" href="{{base}}/css/font-awesome.css"/>
     <link rel="stylesheet" href="{{base}}/css/coderay.css"/>
     <link rel="stylesheet" href="{{base}}/css/asciidoctor.css"/>
-<!--
-    <script src="/js/vendor/modernizr.js"></script>
-    <script src="/js/toc.js"></script>
--->
+
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
 
 
 <!-- Nav Bar -->
 
-<nav class="top-bar" data-topbar>
-    <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name">
-            <h1>
-                <a href="{{base}}">
-                    Home
-                </a>
-            </h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-</nav>
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="menu">
+            <li class="menu-text">almighty</li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+       <ul class="menu">
+           <li><a href="{{base}}/meetings/agendas.html">meetings</a></li>
+           <li><a href="{{base}}/">home</a></li>
+       </ul>
+    </div>
+</div>
 <!-- End Nav -->

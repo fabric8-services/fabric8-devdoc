@@ -16,21 +16,20 @@
 
     <aside class="large-3 columns">
 
-        <div class="panel">
-            <h5>About</h5>
+        <h5>About</h5>
 
-            <p>ALMighty is about providing tools for planning and
-        execution of an idea to production in a highly distributed team. Part of Red Hat Developers
-        Group.</p>
-        </div>
+        <p>ALMighty is about providing tools for planning and
+    execution of an idea to production in a highly distributed team. Part of Red Hat Developers
+    Group.</p>
 
-        <div class="panel">
-            <h5>Blueprints</h5>
-
-            {% for blueprint in site.blueprints %}
-                <a href="{{base}}{{blueprint.url}}">{{blueprint.title}}</a><br/>
-            {% endfor %}
-        </div>
+        <h5>Blueprints</h5>
+        <ul>
+        {% for blueprint in site.blueprints %}
+            <li>
+                <a href="{{base}}{{blueprint.url}}">{{blueprint.title}}</a>
+            </li>
+        {% endfor %}
+        </ul>
 
     </aside>
 
