@@ -82,8 +82,7 @@ module Jekyll
         case @config['asciidoc']
         when 'asciidoctor'
           config = @config['asciidoctor'].dup
-          config[:safe] = Asciidoctor::SafeMode::UNSAFE
-          config[:attributes] = {}
+          config[:attributes] = hashify(config[:attributes])
           config[:attributes]["outdir"] = "#{@dest}/#{@curr_page_output}"
           config[:attributes]["imagesdir"] = ""
 
@@ -103,6 +102,19 @@ module Jekyll
           warn 'Unknown AsciiDoc converter. Cannot load document header.'
           nil
         end
+      end
+
+      def hashify(list)
+        def key(x)
+          return x if x.index("=").nil?
+          return x.slice(0, x.index("=")||-1)
+        end
+        def value(x)
+          index = x.index("=")
+          return "" if index.nil?
+          return x.slice(x.index("=")+1, x.length)
+        end
+        return Hash[list.map {|x| [key(x), value(x)]}]
       end
     end
   end
