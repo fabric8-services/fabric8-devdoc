@@ -40,3 +40,5 @@ User --> Notification: Recived/Viewed
 
 * https://medium.com/@intercom/designing-smart-notifications-36336b9c58fb#.ehe3vdiq6[Designing smart notifications
 ]
+* https://www.youtube.com/watch?v=_dXBibRO0SM&list=PLOU2XLYxmsILe6_eGvDN3GyiodoV3qNSC&index=118[Deep user engagement with web push notifications]
+* https://medium.com/@tristanharris/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3#.e8pd7ycu7[How Technology Hijacks People’s Minds — from a Magician and Google’s Design Ethicist]
