@@ -1,14 +1,59 @@
 ---
 ---
 
-== Design Overview 5
+== Design Overview
 
-[graphviz, dot-example, svg]
+[blockdiag, do, svg]
 ----
-digraph g {
-    a -> b
-    b -> c
-    c -> d
-    d -> a
+blockdiag {
+
+    USER -> C_MAIL, C_WEB, C_CLI, C_DESKTOP, C_MOBILE
+
+    group input {
+        label = "Clients"
+        color = "#ddd"
+        C_MAIL, C_WEB, C_CLI, C_DESKTOP, C_MOBILE
+    }
+
+    group alm {
+        label = "ALM"
+        color = "#fff"
+        style = dotted
+
+        API, MODEL, DATASTORE
+
+        group alm_collector {
+            color = "#f00"
+            label = "ALM Collector"
+            DATA_COLLECTOR, MODEL_TRANS, ASYNC, SYNC
+        }
+    }
+
+    group remote {
+        label = "Remote"
+
+        REMOTE_DATA
+    }
+
+    C_MAIL, C_WEB, C_CLI, C_DESKTOP, C_MOBILE -> API
+
+    API -> MODEL
+
+    MODEL -> DATASTORE
+    MODEL_TRANS -> MODEL
+
+    API -> DATA_COLLECTOR [folded]
+
+    DATA_COLLECTOR -> ASYNC
+    DATA_COLLECTOR -> SYNC
+
+    SYNC <-> REMOTE_DATA[folded]
+    ASYNC <- REMOTE_DATA[folded]
+    SYNC, ASYNC -> MODEL_TRANS
+
+    USER [shape = actor]
+    MODEL [label = "ALM Model"]
+    API [label = "ALM API"]
+    DATASTORE [shape = flowchart.database]
 }
 ----
