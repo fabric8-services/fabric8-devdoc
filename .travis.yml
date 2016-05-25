@@ -2,7 +2,8 @@ language: ruby
 # cache: bundler -- breaks rake builds unfortunately 
 rvm:
 - 2.3.1
-sudo: false
+sudo: required
+dist: trusty
 script: rake travis
 addons:
   apt:
