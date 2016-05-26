@@ -1,0 +1,25 @@
+---
+---
+
+== Model Overview
+
+[graphviz, do, svg]
+----
+digraph G {
+	IDENTITY -> USER
+	
+	USER -> TEAM
+	USER -> WORKITEM[label="CRUD|Assigned"]
+	
+	TEAM -> ROLE
+	TEAM -> PROJECT
+	
+	ROLE -> PERMISSION
+	
+	PROJECT -> WORKITEM
+	
+	WORKITEM -> WORKITEM [label="path"]
+	WORKITEM -> WORKITEM_TYPE
+	WORKITEM_TYPE -> WORKITEM_FAMILY
+}
+----
