@@ -8,7 +8,7 @@
 digraph G {
 	IDENTITY -> USER
 	
-	USER -> TEAM_ROLE
+	IDENTITY -> TEAM_ROLE
 	USER -> WORKITEM[label="CRUD|Assigned"]
 	
 	TEAM_ROLE -> TEAM
