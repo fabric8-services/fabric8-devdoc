@@ -21,7 +21,7 @@ BUILD_DIR := $(WORKSPACE)/almighty-devdoc-linux-build
 BUILD_TAG ?= almighty-devdoc-local-build
 CONTAINER_NAME := $(BUILD_TAG)
 
-# Call with $(call colorecho "hi" " there")
+# Call with $(call printlog,"hi there")
 define printlog
 	$(if ($IS_JENKINS,"no"),@tput setaf 6)
 	@echo $1
