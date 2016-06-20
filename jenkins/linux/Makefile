@@ -1,14 +1,14 @@
 SOURCE_DIR := $(shell pwd)/../..
 DOCKER_IMAGE_DEVDOC := almighty-devdoc
 
-# The IS_JENKINS will be either "yes" or "no" depending on if
-# make is executed inside of Jenkins or locally.
+# The IS_JENKINS will be set depending on if
+# make is executed inside of Jenkins or locally not
 ifneq ($(BUILD_TAG),)
 	IS_JENKINS := "yes"
 	# If running in Jenkins we don't allow for interactively running the container
-	DOCKER_RUN_INTERACTIVE_SWITCH := 
+	DOCKER_RUN_INTERACTIVE_SWITCH :=
 else 
-	IS_JENKINS := "no"
+	IS_JENKINS :=
 	# If not running in Jenkins we allow for interactively running the container
 	DOCKER_RUN_INTERACTIVE_SWITCH :=  -i
 endif
@@ -19,42 +19,47 @@ BUILD_DIR := $(WORKSPACE)/almighty-devdoc-linux-build
 # The BUILD_TAG environment variable will be set by jenkins
 # to reflect jenkins-${JOB_NAME}-${BUILD_NUMBER}
 BUILD_TAG ?= almighty-devdoc-local-build
-CONTAINER_NAME := $(BUILD_TAG)
-
-# Call with $(call printlog,"hi there")
-define printlog
-	$(if ($IS_JENKINS,"no"),@tput setaf 6)
-	@echo $1
-	$(if ($IS_JENKINS,"no"),@tput sgr0)
-endef
+DOCKER_CONTAINER_NAME := $(BUILD_TAG)
 
 .PHONY: all
 all: build
 
 .PHONY: docker-image-devdoc
 docker-image-devdoc:
-	$(call printlog,"Building docker image $(DOCKER_IMAGE_DEVDOC)")
+	@echo "Building docker image $(DOCKER_IMAGE_DEVDOC)"
 	docker build -t $(DOCKER_IMAGE_DEVDOC) .
 
 .PHONY: build-dir
 build-dir:
-	$(call printlog,"Creating build directory $(BUILD_DIR)")
+	@echo "Creating build directory $(BUILD_DIR)"
 	mkdir -p $(BUILD_DIR)
 
-.PHONY: clean
-clean:
-	$(call printlog,"Cleaning build directory $(BUILD_DIR)")
+.PHONY: clean-docker-container
+clean-docker-container:
+	@echo "Removing container named \"$(DOCKER_CONTAINER_NAME)\" (if any)"
+ifneq ($(strip $(shell docker ps -qa --filter "name=$(DOCKER_CONTAINER_NAME)")),) 
+	docker rm -f $(DOCKER_CONTAINER_NAME)
+else
+	@echo "No container named \"$(DOCKER_CONTAINER_NAME)\" to remove"
+endif
+
+.PHONY: clean-build-dir
+clean-build-dir:
+	@echo "Cleaning build directory $(BUILD_DIR)"
 	rm -rf $(BUILD_DIR)
+
+.PHONY: clean
+clean: clean-docker-container clean-build-dir
 	
 .PHONY: build
 build: build-dir docker-image-devdoc
-	$(call prinlog,"Building with container $(CONTAINER_NAME) inside of $(BUILD_DIR)")
+	@echo "Building with container $(CONTAINER_NAME) inside of $(BUILD_DIR)"
 	# TODO (kkleine) Remove interactive switch when running in Jenkins 
 	docker run \
 		-t \
 		$(DOCKER_RUN_INTERACTIVE_SWITCH) \
 		--rm \
-		--name="$(CONTAINER_NAME)" \
+		--name="$(DOCKER_CONTAINER_NAME)" \
 		-v $(SOURCE_DIR):/source-dir:ro \
 		-v $(BUILD_DIR):/build-dir:rw \
 		-e USER=$(USER) \
