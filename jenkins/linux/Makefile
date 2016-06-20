@@ -23,9 +23,9 @@ CONTAINER_NAME := $(BUILD_TAG)
 
 # Call with $(call colorecho "hi" " there")
 define printlog
-	@tput setaf 6
+	$(if ($IS_JENKINS,"no"),@tput setaf 6)
 	@echo $1
-	@tput sgr0
+	$(if ($IS_JENKINS,"no"),@tput sgr0)
 endef
 
 .PHONY: all
