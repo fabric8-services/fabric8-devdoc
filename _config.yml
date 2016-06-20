@@ -19,5 +19,9 @@ defaults:
       type: blueprints
     values:
       layout: blueprint
-      
+
+# When building in Jenkins, this is where the Gems are installed
+# and we don't want them to be checked
+exclude: [bundle-install]
+
 # end of configuration

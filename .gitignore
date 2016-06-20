@@ -6,3 +6,4 @@
 Gemfile.lock
 *.cache
 .ruby-*
+*.swp
