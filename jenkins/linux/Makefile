@@ -22,19 +22,31 @@ BUILD_TAG ?= almighty-devdoc-local-build
 DOCKER_CONTAINER_NAME := $(BUILD_TAG)
 
 .PHONY: all
+# Triggers the "build" target
 all: build
 
+.PHONY: help
+# Shows all the commands and their description
+help:
+	@echo ""
+	@echo "Make file commands"
+	@echo "------------------"
+	@grep -Pzo "(?s)\.PHONY:(\N*)(.*)(^\1)" Makefile | grep -v Makefile | grep -o "\(.PHONY:.*\|^#.*\)" | sed -s 's/.PHONY:\s*/\n- /g' |sed -s 's/#/\t/g'
+
 .PHONY: docker-image-devdoc
+# Builds the docker image used to build the software
 docker-image-devdoc:
 	@echo "Building docker image $(DOCKER_IMAGE_DEVDOC)"
 	docker build -t $(DOCKER_IMAGE_DEVDOC) .
 
 .PHONY: build-dir
+# Creates the build directory
 build-dir:
 	@echo "Creating build directory $(BUILD_DIR)"
 	mkdir -p $(BUILD_DIR)
 
 .PHONY: clean-docker-container
+# Removes any existing container used to build the software (if any)
 clean-docker-container:
 	@echo "Removing container named \"$(DOCKER_CONTAINER_NAME)\" (if any)"
 ifneq ($(strip $(shell docker ps -qa --filter "name=$(DOCKER_CONTAINER_NAME)")),) 
@@ -44,16 +56,24 @@ else
 endif
 
 .PHONY: clean-build-dir
+# Removes the build directory
 clean-build-dir:
 	@echo "Cleaning build directory $(BUILD_DIR)"
 	rm -rf $(BUILD_DIR)
 
 .PHONY: clean
+# Triggers
+#  - clean-docker-container and
+#  - clean-build-dir
 clean: clean-docker-container clean-build-dir
 	
 .PHONY: build
+# Triggers 
+#  - build-dir and
+#  - docker-image-devdoc
+# and then spawns a docker container to build the software
 build: build-dir docker-image-devdoc
-	@echo "Building with container $(CONTAINER_NAME) inside of $(BUILD_DIR)"
+	@echo "Building with container $(DOCKER_CONTAINER_NAME) inside of $(BUILD_DIR)"
 	# TODO (kkleine) Remove interactive switch when running in Jenkins 
 	docker run \
 		-t \
