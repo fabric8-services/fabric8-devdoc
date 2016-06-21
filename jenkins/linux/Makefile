@@ -21,6 +21,10 @@ BUILD_DIR := $(WORKSPACE)/almighty-devdoc-linux-build
 BUILD_TAG ?= almighty-devdoc-local-build
 DOCKER_CONTAINER_NAME := $(BUILD_TAG)
 
+.PHONY: all
+# Triggers the "build" target
+all: build
+
 .PHONY: help
 # Shows all the commands and their description
 help:
@@ -28,10 +32,6 @@ help:
 	@echo "Make file commands"
 	@echo "------------------"
 	@grep -Pzo "(?s)\.PHONY:(\N*)(.*)(^\1)" Makefile | grep -v Makefile | grep -o "\(.PHONY:.*\|^#.*\)" | sed -s 's/.PHONY:\s*/\n- /g' |sed -s 's/#/\t/g'
-
-.PHONY: all
-# Triggers the "build" target
-all: build
 
 .PHONY: docker-image-devdoc
 # Builds the docker image used to build the software
@@ -73,7 +73,7 @@ clean: clean-docker-container clean-build-dir
 #  - docker-image-devdoc
 # and then spawns a docker container to build the software
 build: build-dir docker-image-devdoc
-	@echo "Building with container $(CONTAINER_NAME) inside of $(BUILD_DIR)"
+	@echo "Building with container $(DOCKER_CONTAINER_NAME) inside of $(BUILD_DIR)"
 	# TODO (kkleine) Remove interactive switch when running in Jenkins 
 	docker run \
 		-t \
