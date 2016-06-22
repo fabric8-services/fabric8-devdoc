@@ -6,22 +6,27 @@ collections:
   blueprints:
     output: true
 
+# When building in Jenkins, bundle-install is where the Gems are installed
+# and we don't want them to be checked
+exclude: [Gemfile, Gemfile.lock, Rakefile, jenkins, bundle-install]
+
+# An alternative to monkeypatching Jekyll::Cleaner
+#keep_files: [images]
+
+asciidoc:
+  processor: asciidoctor
 asciidoctor:
+  base_dir: :docdir
   safe: unsafe
   attributes:
+    - showtitle=@
     - idseparator=_
     - source-highlighter=coderay
     - icons=font
-
-defaults:
-  - scope:
-      path: ""
-      type: blueprints
-    values:
-      layout: blueprint
-
-# When building in Jenkins, this is where the Gems are installed
-# and we don't want them to be checked
-exclude: [bundle-install]
-
-# end of configuration
+    # single location for images (auto):
+    - imagesdir=/images
+    # single location for images (explicit):
+    #- imagesdir=/images
+    #- imagesoutdir={site-destination}/images
+    # images relative to document:
+    #- imagesdir=images

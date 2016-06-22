@@ -1,7 +1,4 @@
----
----
-
-== Scheduler
+= Scheduler
 
 [plantuml,scheduler-protocol]
 ....
@@ -15,15 +12,14 @@ Registrar -> Scheduler: ScheduleStatus
 Scheduler --> Registrar: ScheduleStatusResponse
 ....
 
-
-=== Key features
+== Key features
 
 * Time based callbacks
 * Interval
 * 'Global' system database
 * REST interface
 
-=== Usage area
+== Usage area
 
 * Update of external issues
 

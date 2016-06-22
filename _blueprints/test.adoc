@@ -1,7 +1,4 @@
----
----
-
-== Test diagram
+= Test diagram
 
 [ditaa,asciidoctor-diagram-process]
 ....

@@ -1,7 +1,4 @@
----
----
-
-== Notification
+= Notification
 
 [plantuml,notification-protocol]
 ....
@@ -16,7 +13,7 @@ Notification -> User: NotifyCollection
 User --> Notification: Recived/Viewed
 ....
 
-=== Key features
+== Key features
 
 * Output email, mobile, web, ide
 * Collect notifications in intervals
@@ -31,12 +28,11 @@ User --> Notification: Recived/Viewed
 * Opt in and out of different types of notifications
 ** IssueUpdate, IssueComment, CodeCommit, PullRequest, Build, etc
 
-=== Usage area
+== Usage area
 
 * All actions within the system could go to the notification service
 
-
-=== References
+== References
 
 * https://medium.com/@intercom/designing-smart-notifications-36336b9c58fb#.ehe3vdiq6[Designing smart notifications
 ]

@@ -1,6 +1,4 @@
----
----
-== ALMighty Developer Documentation
+= ALMighty Developer Documentation
 
 Initial site content.
 

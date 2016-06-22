@@ -1,7 +1,4 @@
----
----
-
-== Design Overview
+= Design Overview
 
 [blockdiag, design_overview, svg]
 ----
