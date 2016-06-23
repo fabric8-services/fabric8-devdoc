@@ -3,7 +3,7 @@
 
 == Model Overview
 
-[graphviz, do, svg]
+[graphviz, model_overview, svg]
 ----
 digraph G {
 	IDENTITY -> USER

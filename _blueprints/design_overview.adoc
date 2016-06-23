@@ -3,7 +3,7 @@
 
 == Design Overview
 
-[blockdiag, do, svg]
+[blockdiag, design_overview, svg]
 ----
 blockdiag {
 
