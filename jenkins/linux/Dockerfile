@@ -7,6 +7,7 @@ ENV LANG=en_US.utf8
 RUN dnf install -y \
       curl \
       findutils \
+      git \
       graphviz \
       java-1.8.0-openjdk-headless \
       procps-ng \
