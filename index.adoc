@@ -1,23 +1,50 @@
 = ALMighty Developer Documentation
 
-Initial site content.
+Welcome to ALMighty developer documentation site.
 
-[ditaa]
-----
-                   +-------------+
-                   |             |-------+
-                   |  Diagram    |       |
-                   +-------------+       | PNG out
-                       ^                 |
-                       | ditaa in        |
-                       |                 v
- +--------+   +--------+----+    /----------------\
- |        | --+ Asciidoctor +--> |                |
- |  Text  |   +-------------+    |Beautiful output|
- |Document|   |   !magic!   |    |                |
- |     {d}|   |             |    |                |
- +---+----+   +-------------+    \----------------/
-     :                                   ^
-     |          Lots of work             |
-     +-----------------------------------+
-----
+ALMighty is a project started by Red Hat to create an opensource ALM covering
+the lifecycle from ideatizon, development, production to sunsetting of an application.
+
+We are still getting started, so bare with us :)
+
+For now the site is for documenting our process and to keep track of the work we
+have done.
+
+Some links might not be fully public, but we will get them move over as soon as possible.
+
+== Communication
+
+We are currently on hipchat (almighty room), with plans on moving to public hosted mattermost or similar soon(tm)!
+
+Mailing list - we have a public mailing list `https://www.redhat.com/mailman/listinfo/almighty-public[almighty-public@redhat.com]`
+
+== Team
+
+[format="csv", options="header"]
+|===
+Name, Role, Areas, Time, Comment
+https://github.com/maxandersen[Max Rydahl Andersen], Manager/Lead, , 75%,
+https://github.com/aslakknutsen[Aslak Knutsen], Dev Lead, Backend, 100%,
+Thomas Maeder, Dev, Backend, 100%,
+Joshua Wilson, Dev, UI, 100%,
+Dhirit Shikhar, Dev intern, Backend, 100%,
+Monica Granfield, UX Lead, , 100%,
+Richa Rupela, Dev intern, Backend, 100%,
+Konrad Kleine, Dev, Backend, 100%,
+Ranjith Varakan, Scrum Master, , ,
+|===
+
+
+(If you feel you are missing from the above list, please make a pull-request to update)
+
+== Resources
+
+[format="csv", options="header"]
+|===
+Resources, Comment
+http://devdoc.almighty.io/, devdoc website (where this gets published) 
+https://projects.invisionapp.com/share/RD7QIB3QY#/screens[Invision prototypes], Ask Monica about access if you need
+https://trello.com/b/sRsGpP8m/alm-track-manage-design-project[UX Trello], Private - should be moved soon
+https://trello.com/b/VAZQS7ox/alpina-alm[Alpina ALM Trello board], Private - should be moved soon
+https://trello.com/b/7lr2DtMg/rusty-swallow[Rusty Trello Dev Trello Board], Private - should be moved soon
+|===
