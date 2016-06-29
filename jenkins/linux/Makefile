@@ -74,7 +74,6 @@ clean: clean-docker-container clean-build-dir
 # and then spawns a docker container to build the software
 build: build-dir docker-image-devdoc
 	@echo "Building with container $(DOCKER_CONTAINER_NAME) inside of $(BUILD_DIR)"
-	# TODO (kkleine) Remove interactive switch when running in Jenkins 
 	docker run \
 		-t \
 		$(DOCKER_RUN_INTERACTIVE_SWITCH) \
