@@ -23,16 +23,16 @@ Mailing list - we have a public mailing list `https://www.redhat.com/mailman/lis
 [format="csv", options="header"]
 |===
 Name, Role, Areas, Time, Comment
-https://github.com/maxandersen[Max Rydahl Andersen], Manager/Lead, , 75%,
-https://github.com/aslakknutsen[Aslak Knutsen], Dev Lead, Backend, 100%,
-Thomas Maeder, Dev, Backend, 100%,
-Joshua Wilson, Dev, UI, 100%,
-Dhriti Shikhar, Dev intern, Backend, 100%,
-Monica Granfield, UX Lead, , 100%,
-Josephine Qian, UX, , 100%,
-Richa Rupela, Dev intern, Backend, 100%,
-Konrad Kleine, Dev, Backend, 100%,
-Ranjith Varakan, Scrum Master, , ,
+https://github.com/maxandersen[Max Rydahl Andersen], Manager/Lead, , 75% (CET),
+https://github.com/aslakknutsen[Aslak Knutsen], Dev Lead, Backend, 100% (CET),
+Thomas Maeder, Dev, Backend, 100% (CET),
+Joshua Wilson, Dev, UI, 100% (EST),
+Dhriti Shikhar, Dev intern, Backend, 100% (IST),
+Monica Granfield, UX Lead, , 100% (EST),
+Josephine Qian, UX, , 100% (EST),
+Richa Rupela, Dev intern, Backend, 100% (IST),
+Konrad Kleine, Dev, Backend, 100% (CET),
+Ranjith Varakan, Scrum Master, (IST), ,
 |===
 
 
