@@ -24,7 +24,7 @@ asciidoctor:
     - source-highlighter=coderay
     - icons=font
     # single location for images (auto):
-    - imagesdir=/images
+    - imagesdir=images
     # single location for images (explicit):
     #- imagesdir=/images
     #- imagesoutdir={site-destination}/images
