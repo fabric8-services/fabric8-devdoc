@@ -24,6 +24,7 @@ Mailing list - we have a public mailing list `https://www.redhat.com/mailman/lis
 |===
 Name, Role, Areas, Time, Time zone, Comment
 https://github.com/maxandersen[Max Rydahl Andersen], Manager/Lead, , 75%, CET,
+https://github.com/qodfathr[Todd A. Mancini], Product Manager, ,10%, EST,
 https://github.com/aslakknutsen[Aslak Knutsen], Dev Lead, Backend, 100%, CET,
 https://github.com/tsmaeder[Thomas Maeder], Dev, Backend, 100%, CET,
 https://github.com/joshuawilson[Joshua Wilson], Dev, UI, 100%, EST,
