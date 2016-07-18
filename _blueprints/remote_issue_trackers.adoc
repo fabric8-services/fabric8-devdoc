@@ -326,3 +326,324 @@ https://github.com/plish/Trolly
 3. *Pull requests*: 25
 4. *No. of contributors*: 8 | Trello functionalities are there but no auth support till now.| Library has no auth support. | No Version
 |===================================================================
+
+[bugzilla]
+== Bugzilla 
+
+Bugzilla exposes its api through xmlrpc protocol
+
+[[sync-calls]]
+*Sync Calls:*
+
+* Run an external program to query Jira using REST, check the changes, sync to your application.
+	** This approach requires you to implement the logic that the issue has been updated
+	** Bugzilla allows you to retrive history of a bug
+
+[[callback-support]]
+*Callback Support:*
+
+REDHAT Bugzilla Api doesnot support event notification:
+https://bugzilla.redhat.com/show_bug.cgi?id=978953
+
+[[query]]
+*Query:*
+
+* Bugzilla supports MYSQL queries.
+* You can save the search as Remembered search and query it.
+* You can query using keyword/text.
+
+[[individual-lookup]]
+*Individual Lookup:*
+
+|=================================================================
+|Type |Yes/No
+|User | Yes, through user id, real name, email address
+|Issue | Yes, through issue id or alias
+|Comment | Yes
+|Version/Branch | Yes
+|Product/ Component | Yes
+|=================================================================
+
+[[collect-sample-data]]
+*Collect Sample Data:*
+
+----
+>>curl --silent --insecure https://bugzilla.redhat.com/xmlrpc.cgi -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='UTF-8'?><methodCall><methodName>Bug.get</methodName> <params><param><value><struct><member><name>ids</name><value>575745</value></member></struct></value></param> </params> </methodCall>"
+----
+
+[source, xml]
+-----
+<?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>faults</name><value><array><data /></array></value></member><member><name>bugs</name><value><array><data><value><struct><member><name>priority</name><value><string>unspecified</string></value></member><member><name>cf_category</name><value><string>---</string></value></member><member><name>blocks</name><value><array><data /></array></value></member><member><name>creator</name><value><string>Marc Schoenefeld</string></value></member><member><name>last_change_time</name><value><dateTime.iso8601>20150819T08:44:27</dateTime.iso8601></value></member><member><name>cf_ovirt_team</name><value><string>---</string></value></member><member><name>is_cc_accessible</name><value><boolean>1</boolean></value></member><member><name>keywords</name><value><array><data><value><string>Security</string></value></data></array></value></member><member><name>cc</name><value><array><data><value><string>Andrew John Hughes</string></value><value><string>Andrew Haley</string></value><value><string>Deepak Bhole</string></value><value><string>Jiri Pechanec</string></value><value><string>Red Hat Product Security</string></value></data></array></value></member><member><name>url</name><value><string /></value></member><member><name>assigned_to</name><value><string>Red Hat Product Security</string></value></member><member><name>groups</name><value><array><data /></array></value></member><member><name>see_also</name><value><array><data /></array></value></member><member><name>id</name><value><int>575745</int></value></member><member><name>creation_time</name><value><dateTime.iso8601>20100322T10:21:00</dateTime.iso8601></value></member><member><name>whiteboard</name><value><string>impact=none,source=sun,public=20100330,reported=20100319</string></value></member><member><name>qa_contact</name><value><string /></value></member><member><name>depends_on</name><value><array><data /></array></value></member><member><name>cf_regression_status</name><value><string>---</string></value></member><member><name>docs_contact</name><value><string /></value></member><member><name>cf_story_points</name><value><string>---</string></value></member><member><name>resolution</name><value><string /></value></member><member><name>classification</name><value><string>Other</string></value></member><member><name>alias</name><value><array><data /></array></value></member><member><name>cf_doc_type</name><value><string>Bug Fix</string></value></member><member><name>op_sys</name><value><string>Linux</string></value></member><member><name>cf_crm</name><value><string /></value></member><member><name>target_release</name><value><array><data><value><string>---</string></value></data></array></value></member><member><name>status</name><value><string>NEW</string></value></member><member><name>cf_type</name><value><string>---</string></value></member><member><name>cf_documentation_action</name><value><string>---</string></value></member><member><name>summary</name><value><string>OpenJDK ThreadGroup finalizer allows creation of false root ThreadGroups (6639665)</string></value></member><member><name>cf_mount_type</name><value><string>---</string></value></member><member><name>is_open</name><value><boolean>1</boolean></value></member><member><name>platform</name><value><string>All</string></value></member><member><name>severity</name><value><string>unspecified</string></value></member><member><name>cf_environment</name><value><string /></value></member><member><name>version</name><value><array><data><value><string>unspecified</string></value></data></array></value></member><member><name>component</name><value><array><data><value><string>vulnerability</string></value></data></array></value></member><member><name>cf_fixed_in</name><value><string /></value></member><member><name>is_creator_accessible</name><value><boolean>1</boolean></value></member><member><name>product</name><value><string>Security Response</string></value></member><member><name>target_milestone</name><value><string>---</string></value></member><member><name>is_confirmed</name><value><boolean>1</boolean></value></member><member><name>cf_release_notes</name><value><string /></value></member><member><name>cf_verified_branch</name><value><string /></value></member></struct></value></data></array></value></member></struct></value></param></params></methodResponse>
+-----
+
+[[auth-models]]
+*Auth models:*
+
+* There are 2 authentication models:
+    ** Basic authentication
+	** Two factor authentication
+
+* Basic Authentication:
+	** send a HTTP GET request with proper credentials to the endpoint:
+		+ https://bugzilla.mozilla.org/rest/login?login=username&password=password
+	** It returns an id and token
+	** Use token in URL.
+		+ https://bugzilla.mozilla.org/rest/bug?token=272345-L1KydUNCwq&f1=cf_tracking_firefox31&o1=equals&v1=%2B&include_fields=id
+
+* Two factor authenticatoon:
+	** If you have two-factor authentication on your bugzilla account, then create a new API key and pass it to each request
+		+ requests.get('https://bugzilla.mozilla.org/rest/bug', params={'id': '1214433', 'api_key': 'xyz'})
+
+* Cookie authentication is not accepted.
+
+[[auth-levels]]
+*Authorization Level*
+
+* Permission to do stuff in Bugzilla are defined by groups and Bugzilla users get membership to certain groups manually or automatically
+
+* Groups:
+	** restrict visibility of bugs to a specific set of users
+	** Types:
+		 - Generic group
+		 - Product based group
+
+|================================================================
+|*Administrators*| *Permissions* 
+| who have "editbugs" priviledges | can edit all bug fields 
+| who have "editkeywords" priviledges | can create, destroy, edit keywords
+| who have "editusers" priviledges | can create, update, block user profiles
+| who have "canconfirm" priviledges	| can confirm a bug or mark it as duplicate
+| who have "admin" priviledges | can edit fields, groups -> total control over Bugzilla
+|================================================================
+
+[[bugzilla-golang-libraries]]
+=== Bugzilla Golang libraries
+
+
+|===================================================================
+|  | Completeness | Style | Community | Feature Support | Auth Support | Version
+
+| *bugtraq* https://github.com/mfojtik/bugtraq | Complete | Object oriented |
+1. *Last commit* - 23 July 2014
+2. *Last pull request*- No PR
+3. *No. of contributors*: 1
+4. *No. of watchers*: 0
+5. *No. of stars*: 0| uses xmlrp | Yes, through username-password | It is the first version. No further versions released. Branch -> master
+
+| moz-go-bugzilla https://github.com/st3fan/moz-go-bugzilla
+| Not complete | Object oriented |
+1. *last commit* - 28 Nov 2013
+2. *last pull request*- No PR
+3. *No. of contributors*: 1
+4. *No. of watchers*: 0
+5. *No. of stars* 0 | custom fields | No | It is the first version. No further versions released. Branch -> master
+
+|gorgojo https://github.com/dmacvicar/gorgojo | not complete | object-oriented |1. *Last commit*: 14 March 2016
+1. *Last PR*: No PR 
+2. *No. of contributors*: 1 contributor
+3. *No.of watchers*: 0 watcher,
+4. *No. of stars*: 0 star | get bugs, search bugs | No | It is the first version. No versions further released, Branch -> master
+
+|bugzilla https://github.com/mkorenkov/bugzilla | not complete | object-oriented |
+1. *Last commit*: 1 November 2015
+*Last PR*: No PR
+*No. of contributors*: 1 contributor
+*No. of watchers*: 2 watchers
+*No. of stars*: 1 star | list bugs, lookup bug details using id, add comment to bug | Yes, through username and password | It is the first version. No versions further released, Branch -> master 
+|===================================================================
+
+
+[[bugzilla-python-libraries]]
+=== Bugzilla Python libraries
+
+|=================================
+|  | Completeness | Style | Community | Feature Support | Auth Support | Version
+
+|bugzilla https://github.com/python-bugzilla/python-bugzilla | complete | object-oriented | 
+1. *Last commit*: 8 June 2016 
+2. *Last PR*: 26 May 2016
+3. *No. of contributors*: 30 contributors
+4. *No. of watchers*: 5 watchers
+5. *No. of stars*: 17 stars | uses xmlrp, create and edit bug, querying, update | Yes, through username and password | Latest version: v1.2.2, Branch -> master
+
+|PyBugz https://github.com/williamh/pybugz | complete | object-oriented | 
+1. *Last commit*: 10 July 2016
+2. *Last PR*: 10 Feb 2016
+3. *No. of contributors*: 27 contributors
+4. *No. of watchers*: 11 watchers,
+5. *No. of stars*: 69 stars | list details of bug including comments and attachments, downloading/viewing attachments, posting bugs/ comments, modifying existing bug, adding attachment to bug | Yes, through username and password | Latest version: v0.12.x, Branches -> master, 0.10.x, 0.11.x, 0.12.x, refactor
+|=================================
+
+[jira]
+== Jira library
+
+[[sync-calls]]
+*Sync Calls:*
+
+* Run an external program to query Jira using REST, check the changes, sync to your application.
+	** This approach requires you to implement the logic that the issue has been updated
+	** load on Jira for each polling.
+
+* Jira Command Line Interface
+	** good functionality
+	** launching the process every time can be a bit of a burden
+	** easy to debug and maintain
+	** recommended approach
+
+[[callback-support]]
+*Callback Support:*
+
+* done through the use of jira webhooks which can be created using rest api
+
+* When webhook is triggered, it sends a JSON callback containing:
+    ** event id
+    ** timestamp
+    ** information about entity(issue, project etc) associated with event
+    ** additional information depending on type of event
+
+[[query]]
+*Query:*
+
+* Jira REST API allows you to send a JQL query and recieve a subset of issues.
+
+* We can:
+    ** perform text search
+    ** run saved search
+
+[[individual-lookup]]
+*Individual Lookup:*
+
+* User:
+    ** There is no direct method to get all users in Jira REST Api.
+    ** You can search for a particular user using string.
+    **  https://servername/rest/api/2/user/search?username=a this returns all users that have "a" somewhere in their name
+    **  Workaround:
+        + You can get list of all users belonging to a group (although you cannot get list of all groups)
+        + You can get list of all users which can be assigned to a project
+        
+* Issue:
+    ** Yes. We can get all issue data through issue id.
+        + /rest/api/2/issue/{issueId}
+
+* Comments:
+    ** Yes. We can pull all comments for each issue in each project and checking them one by one using comment id.
+        + /rest/api/2/issue/{issueId}/comment/{id}
+        
+[[collect-sample-data]]
+*Collect Sample Data:*
+
+----
+>>curl -u username:password -X GET -H "Content-Type: application/json" https://issues.jboss.org/rest/api/2/issue/12406319?fields=status
+----
+
+[source, json]
+-----
+{"expand":"renderedFields,names,schema,transitions,operations,editmeta,changelog","id":"12406319","self":"https://issues.jboss.org/rest/api/2/issue/12406319","key":"ARQ-88","fields":{"status":{"self":"https://issues.jboss.org/rest/api/2/status/6","description":"The issue is considered finished, the resolution is correct. Issues which are not closed can be reopened.","iconUrl":"https://issues.jboss.org/images/icons/statuses/closed.png","name":"Closed","id":"6","statusCategory":{"self":"https://issues.jboss.org/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Done"}}}
+-----
+
+[[auth-models]]
+*Auth models:*
+
+* There are 3 authentication models:
+    ** Basic authentication
+    ** Cookie based Authentication
+    ** OAuth
+    
+* Basic authentication:
+    ** Authenticate on HTTP using username and password
+    ** If you simply specify the username, curl will prompt for password. It doesnot give error
+    ** JIRA permits a default level of access to anonymous users. It doesnot supply a typical authentication challenge.
+    ** Usage example:
+    
+------
+curl -D- -u <username:password> -X GET -H "Content-Type: application/json" <url>
+------
+
+* Cookie based authentication:
+    ** benefits:
+        + performance (not having to make multiple authentication calls)
+    ** disadvantage:
+        + security risks (cookie can be hijacked if not handled properly)
+    ** working:
+        + Create a new session. Post user credentials ({ "username": "myuser", "password": "mypassword" }) to session resource (http://jira.example.com:8090/jira/rest/auth/1/session)
+        + Store session object on client
+        + Add cookie name and value in header field of your request. Example: headers: {cookie: JSESSIONID=6E3487971234567896704A9EB4AE501F}
+    ** If cookie has expired, it gives 401 error response
+    ** This authentication model should be used when script involving REST API calls should be runs only for a few minutes
+
+* OAuth:
+    ** Open Standard of Authorization
+    ** A way through which users can log in using third party websites
+    ** Registering Your Application via OAuth:
+        + In the "Applications Links administration" screen, create a new application link
+        + Enter correct URL to your client
+        + If your client can be reached via HTTP, choose Generic Application Type
+        + Configure your client to support OAuth
+    ** How to authenticate via OAuth:
+        + obtain request token from Jira
+        + authorize this token
+        + swap request token with access token
+        + make authentication request to REST end point
+        
+* Captcha:
+    ** It is triggered after several consecutive failed log in attempts
+    ** user is supposed to interpret a distorted picture of word and type that word into a text field
+    ** If captcha has been triggered, you cannot use Jira's REST api to authenticate with the JIRA site.
+    ** how to check if captcha has been triggered?
+        + You will get an error response from JIRA with the header "X-Seraph-LoginReason" with value "AUTHENTICATION_DENIED"
+
+[[auth-levels]]
+*Authorization Level*
+
+|==================================================
+| *Action* | *Permission*
+| Browse projects and issues | Anyone 
+| View commit information | Anyone 
+| Create issues | Registered User 
+| Add comments | Registered User 
+| lookup | Anyone 
+| Query | Anyone. No field level security 
+| Callback | Register via Jira REST Api. User must have administrators global permission. 
+|==================================================
+
+[[Jira-golang-libraries]]
+=== Jira Golang libraries
+
+|===================================================================
+|  | Completeness | Style | Community | Feature Support | Auth Support | Version
+
+| https://github.com/Netflix-Skunkworks/go-jira | complete | object-oriented |
+1. *Last commit*: 9 July 2016
+2. *Last PR*: 31 March 2016
+3. *No. of contributors*: 8 contributors
+4. *No. of watchers*: 47 watchers
+5. *No. of stars*: 146 stars | edit issues, create new issues, assign issues | Yes, through username and password | Latest version: v0.1.2, Branch -> master
+
+|https://github.com/andygrunwald/go-jira | complete | object-oriented |
+1. *Last commit*: 19 June 2016
+2. *Last PR:* 8 June 2016
+3. *No. of contributors*: 10 contributors
+4. *No. of watchers*: 4 watchers
+5. *No. of stars*: 29 stars | feature to call every endpoint of jira even if it is not directly implemented in this library | Yes, through username-password, OAuth, Session Cookie | It is the first version. No versions further released. Branch -> master
+
+| https://github.com/plouc/go-jira-client | complete | object-oriented |
+1. *Last commit*: 16 June 2016
+2. *Last PR*: 15 June 2016
+3. *No. of contributors*: 5 contributors
+4. *No. of watchers*: 3 watchers,
+5. *No. of stars*: 26 stars | search user/issue, get activity feed | Yes, through username and password | It is the first version. No versions further released. Branch -> master
+
+| https://github.com/salsita/go-jira | api incomplete | object-oriented |
+1. *Last commit*: 28 Jan 2016 2. *Last PR*: No PR 3.*No. of contributors*: 2 contributors 4.*No. of watchers*: 7 watchers 5. *No. of stars*: 6 stars | get issue/ project/ user details, supports querying | Yes, through username-password, OAuth | No versions released. It is the first version. Branch -> master
+|===================================================================
+
+[[Jira-python-libraries]]
+=== Jira Python libraries
+
+|===================================================================
+|  | Completeness | Style | Community | Feature Support | Auth Support | Version
+
+|jira https://github.com/pycontribs/jira | complete, stable, some additional features PR are open | object-oriented | 1. *Last commit*: 28 June 2016 2. *Last PR*: 9 July 2016 3. *No. of contributors*: 86 contributors 4. *No. of watchers*: 42 watchers 5. *No. of stars*: 209 stars | edit issues, create issues, assign issues | Yes, through: username-password, OAuth, Kerberos | Latest version: v0.1.2, Branches -> develop, master
+
+|===================================================================
+
