@@ -51,6 +51,6 @@ Ranjith Varakan, Scrum Master, , IST,
 Resources, Comment
 http://devdoc.almighty.io/, devdoc website (where this gets published) 
 https://projects.invisionapp.com/share/RD7QIB3QY#/screens[Invision prototypes], Ask Monica about access if you need
-https://trello.com/b/VAZQS7ox/alpina-alm[Alpina ALM Trello board], Private - should be moved soon
-https://trello.com/b/7lr2DtMg/rusty-swallow[Rusty Trello Dev Trello Board], Private - should be moved soon
+https://trello.com/b/sRsGpP8m/alm-track-manage-design-project[UX Trello], Private - should be moved soon
+https://trello.com/b/MHDVMYyz/team-alm-plan[Team ALM Trello board], Private - should be moved to ALMighty ASAP
 |===

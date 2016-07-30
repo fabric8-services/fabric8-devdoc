@@ -1,0 +1,19 @@
+= almighty-devdoc
+
+Development documentation site for almighty.
+
+Pushes to this site is automatically published to http://devdoc.almighty.io
+
+== How to build it
+
+```
+pip install blockdiag
+```
+
+This site is using jekyll, if you already have it installed you can the following:
+
+```
+bundle install
+bundle exec jekyll build
+```
+
