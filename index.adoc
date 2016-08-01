@@ -37,8 +37,8 @@ https://github.com/gunjansobhani[Gunjan Sobhani], UX Intern, , TBD%, EST,
 https://github.com/Ritsyy[Richa Rupela], Dev intern, Backend, 100%, IST,
 https://github.com/gunjansobhani[Gunjan Sobhani], UX Intern, , , IST,
 https://github.com/kwk[Konrad Kleine], Dev, Backend, 100%, CET,
-Ranjith Varakan, Scrum Master, , IST,
-
+Ranjith Varakan, Scrum Master, , , IST,
+https://github.com/ldimaggi[Len DiMaggio], QE, UI/Backend, 50%, EST,
 |===
 
 
@@ -49,7 +49,7 @@ Ranjith Varakan, Scrum Master, , IST,
 [format="csv", options="header"]
 |===
 Resources, Comment
-http://devdoc.almighty.io/, devdoc website (where this gets published) 
+http://devdoc.almighty.io/, devdoc website (where this gets published)
 https://projects.invisionapp.com/share/RD7QIB3QY#/screens[Invision prototypes], Ask Monica about access if you need
 https://trello.com/b/sRsGpP8m/alm-track-manage-design-project[UX Trello], Private - should be moved soon
 https://trello.com/b/MHDVMYyz/team-alm-plan[Team ALM Trello board], Private - should be moved to ALMighty ASAP
