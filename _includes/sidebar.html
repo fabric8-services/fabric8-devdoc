@@ -1,0 +1,43 @@
+<!-- Main Page Content and Sidebar -->
+
+<div class="row">
+    <!-- Main Blog Content -->
+    <div class="large-9 columns" role="content">
+
+        {{ content }}
+
+    </div>
+
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+
+    <aside class="large-3 columns">
+
+        <h5>About</h5>
+
+        <p>ALMighty is about providing tools for planning and
+    execution of an idea to production in a highly distributed team. Part of Red Hat Developers
+    Group.</p>
+
+        <h5>Blueprints</h5>
+        <ul>
+        {% for blueprint in site.blueprints %}
+            <li>
+                <a href="{{base}}{{blueprint.url}}">{{blueprint.title}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h6>Actions</h6>
+        <ul>
+            <li>
+                <a href="{{site.data.global.github_repo_http}}/edit/master/{{page.path}}">Edit</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- End Sidebar -->
+</div>
+
+<!-- End Main Content and Sidebar -->
