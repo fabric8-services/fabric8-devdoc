@@ -5,7 +5,7 @@ Welcome to ALMighty developer documentation site.
 ALMighty is a project started by Red Hat to create an opensource ALM covering
 the lifecycle from ideatizon, development, production to sunsetting of an application.
 
-We are still getting started, so bare with us :)
+We are still getting started, so bear with us :)
 
 For now the site is for documenting our process and to keep track of the work we
 have done.
@@ -39,6 +39,7 @@ https://github.com/gunjansobhani[Gunjan Sobhani], UX Intern, , , IST,
 https://github.com/kwk[Konrad Kleine], Dev, Backend, 100%, CET,
 Ranjith Varakan, Scrum Master, , , IST,
 https://github.com/ldimaggi[Len DiMaggio], QE, UI/Backend, 50%, EST,
+https://github.com/sbose78[Shoubhik Bose], Dev, Backend, 100%, IST,
 |===
 
 
