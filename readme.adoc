@@ -16,4 +16,8 @@ This site is using jekyll, if you already have it installed you can the followin
 bundle install
 bundle exec jekyll build
 ```
+To serve the site and check how it looks in the browser:
 
+```
+jekyll serve
+```
