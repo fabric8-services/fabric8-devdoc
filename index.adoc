@@ -40,6 +40,7 @@ https://github.com/kwk[Konrad Kleine], Dev, Backend, 100%, CET,
 Ranjith Varakan, Scrum Master, , , IST,
 https://github.com/ldimaggi[Len DiMaggio], QE, UI/Backend, 50%, EST,
 https://github.com/sbose78[Shoubhik Bose], Dev, Backend, 100%, IST,
+https://github.com/pranavgore09[Pranav Gore], Dev, Backend, 100%, IST,
 |===
 
 
