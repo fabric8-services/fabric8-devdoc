@@ -43,6 +43,7 @@ https://github.com/sbose78[Shoubhik Bose], Dev, Backend, 100%, IST,
 https://github.com/pranavgore09[Pranav Gore], Dev, Backend, 100%, IST,
 https://github.com/baijum[Baiju Muthukadan], Dev, Backend, 100%, IST,
 https://github.com/dustymabe[Dusty Mabe], Dev, Containers, 20%, EST,
+https://github.com/naina-verma[Naina Verma], QE, ALM/Plan, 50%, IST,
 |===
 
 
