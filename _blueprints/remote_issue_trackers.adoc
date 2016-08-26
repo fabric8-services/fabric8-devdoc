@@ -367,6 +367,8 @@ https://bugzilla.redhat.com/show_bug.cgi?id=978953
 [[collect-sample-data]]
 *Collect Sample Data:*
 
+*XML-RPC*
+
 ----
 >>curl --silent --insecure https://bugzilla.redhat.com/xmlrpc.cgi -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='UTF-8'?><methodCall><methodName>Bug.get</methodName> <params><param><value><struct><member><name>ids</name><value>575745</value></member></struct></value></param> </params> </methodCall>"
 ----
@@ -375,6 +377,91 @@ https://bugzilla.redhat.com/show_bug.cgi?id=978953
 -----
 <?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>faults</name><value><array><data /></array></value></member><member><name>bugs</name><value><array><data><value><struct><member><name>priority</name><value><string>unspecified</string></value></member><member><name>cf_category</name><value><string>---</string></value></member><member><name>blocks</name><value><array><data /></array></value></member><member><name>creator</name><value><string>Marc Schoenefeld</string></value></member><member><name>last_change_time</name><value><dateTime.iso8601>20150819T08:44:27</dateTime.iso8601></value></member><member><name>cf_ovirt_team</name><value><string>---</string></value></member><member><name>is_cc_accessible</name><value><boolean>1</boolean></value></member><member><name>keywords</name><value><array><data><value><string>Security</string></value></data></array></value></member><member><name>cc</name><value><array><data><value><string>Andrew John Hughes</string></value><value><string>Andrew Haley</string></value><value><string>Deepak Bhole</string></value><value><string>Jiri Pechanec</string></value><value><string>Red Hat Product Security</string></value></data></array></value></member><member><name>url</name><value><string /></value></member><member><name>assigned_to</name><value><string>Red Hat Product Security</string></value></member><member><name>groups</name><value><array><data /></array></value></member><member><name>see_also</name><value><array><data /></array></value></member><member><name>id</name><value><int>575745</int></value></member><member><name>creation_time</name><value><dateTime.iso8601>20100322T10:21:00</dateTime.iso8601></value></member><member><name>whiteboard</name><value><string>impact=none,source=sun,public=20100330,reported=20100319</string></value></member><member><name>qa_contact</name><value><string /></value></member><member><name>depends_on</name><value><array><data /></array></value></member><member><name>cf_regression_status</name><value><string>---</string></value></member><member><name>docs_contact</name><value><string /></value></member><member><name>cf_story_points</name><value><string>---</string></value></member><member><name>resolution</name><value><string /></value></member><member><name>classification</name><value><string>Other</string></value></member><member><name>alias</name><value><array><data /></array></value></member><member><name>cf_doc_type</name><value><string>Bug Fix</string></value></member><member><name>op_sys</name><value><string>Linux</string></value></member><member><name>cf_crm</name><value><string /></value></member><member><name>target_release</name><value><array><data><value><string>---</string></value></data></array></value></member><member><name>status</name><value><string>NEW</string></value></member><member><name>cf_type</name><value><string>---</string></value></member><member><name>cf_documentation_action</name><value><string>---</string></value></member><member><name>summary</name><value><string>OpenJDK ThreadGroup finalizer allows creation of false root ThreadGroups (6639665)</string></value></member><member><name>cf_mount_type</name><value><string>---</string></value></member><member><name>is_open</name><value><boolean>1</boolean></value></member><member><name>platform</name><value><string>All</string></value></member><member><name>severity</name><value><string>unspecified</string></value></member><member><name>cf_environment</name><value><string /></value></member><member><name>version</name><value><array><data><value><string>unspecified</string></value></data></array></value></member><member><name>component</name><value><array><data><value><string>vulnerability</string></value></data></array></value></member><member><name>cf_fixed_in</name><value><string /></value></member><member><name>is_creator_accessible</name><value><boolean>1</boolean></value></member><member><name>product</name><value><string>Security Response</string></value></member><member><name>target_milestone</name><value><string>---</string></value></member><member><name>is_confirmed</name><value><boolean>1</boolean></value></member><member><name>cf_release_notes</name><value><string /></value></member><member><name>cf_verified_branch</name><value><string /></value></member></struct></value></data></array></value></member></struct></value></param></params></methodResponse>
 -----
+
+*JSON-RPC*
+
+----
+>>curl --silent --insecure https://bugzilla.redhat.com/jsonrpc.cgi -H "Content-Type: application/json" -d '{"method": "Bug.get", "params": [{ "ids": ["575745"] }], "id": "1"}'
+----
+
+[source, json]
+-----
+{
+    "error": null,
+    "id": "1",
+    "result": {
+        "bugs": [
+            {
+                "alias": [],
+                "assigned_to": "Red Hat Product Security",
+                "blocks": [],
+                "cc": [
+                    "Andrew John Hughes",
+                    "Andrew Haley",
+                    "Deepak Bhole",
+                    "Jiri Pechanec",
+                    "Red Hat Product Security"
+                ],
+                "cf_atomic": null,
+                "cf_category": "---",
+                "cf_clone_of": null,
+                "cf_crm": "",
+                "cf_doc_type": "Bug Fix",
+                "cf_documentation_action": "---",
+                "cf_environment": "",
+                "cf_fixed_in": "",
+                "cf_mount_type": "---",
+                "cf_ovirt_team": "---",
+                "cf_regression_status": "---",
+                "cf_release_notes": "",
+                "cf_story_points": "---",
+                "cf_type": "---",
+                "cf_verified_branch": "",
+                "classification": "Other",
+                "component": [
+                    "vulnerability"
+                ],
+                "creation_time": "2010-03-22T10:21:00Z",
+                "creator": "Marc Schoenefeld",
+                "depends_on": [],
+                "docs_contact": "",
+                "dupe_of": null,
+                "groups": [],
+                "id": 575745,
+                "is_cc_accessible": true,
+                "is_confirmed": true,
+                "is_creator_accessible": true,
+                "is_open": true,
+                "keywords": [
+                    "Security"
+                ],
+                "last_change_time": "2015-08-19T08:44:27Z",
+                "op_sys": "Linux",
+                "platform": "All",
+                "priority": "unspecified",
+                "product": "Security Response",
+                "qa_contact": "",
+                "resolution": "",
+                "see_also": [],
+                "severity": "unspecified",
+                "status": "NEW",
+                "summary": "OpenJDK ThreadGroup finalizer allows creation of false root ThreadGroups (6639665)",
+                "target_milestone": "---",
+                "target_release": [
+                    "---"
+                ],
+                "url": "",
+                "version": [
+                    "unspecified"
+                ],
+                "whiteboard": "impact=none,source=sun,public=20100330,reported=20100319"
+            }
+        ],
+        "faults": []
+    }
+}
+-----
+
 
 [[auth-models]]
 *Auth models:*
