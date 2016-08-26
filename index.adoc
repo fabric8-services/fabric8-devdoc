@@ -32,6 +32,7 @@ https://github.com/DhritiShikhar[Dhriti Shikhar], Dev intern, Backend, 100%, IST
 https://github.com/Mgranfie[Monica Granfield], UX Lead, , 100%, EST,
 Josephine Qian, UX, , 50%, EST,
 Sarajane Clark (SJ), User Research + UX, , 20%, EST,
+https://github.com/mindreeper2420[Adam Jolicoeur], Interaction Designer, , 100%, EST,
 Laura Wright, UX Intern, , 50%, EST,
 https://github.com/gunjansobhani[Gunjan Sobhani], UX Intern, , TBD%, EST,
 https://github.com/Ritsyy[Richa Rupela], Dev intern, Backend, 100%, IST,
