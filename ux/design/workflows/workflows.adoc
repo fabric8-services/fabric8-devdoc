@@ -4,6 +4,6 @@
 
 This describes the workflow of the project or product manager in ALM.
 
-image:ux/Owner%20Flow.png[Image]
+image:Owner%20Flow.png[Image]
 
-To see full scale click this link:ux/Owner%20Flow.png[Image].
+To see full scale click this link:Owner%20Flow.png[Image].
