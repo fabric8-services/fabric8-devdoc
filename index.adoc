@@ -44,6 +44,7 @@ https://github.com/baijum[Baiju Muthukadan], Dev, Backend, 100%, IST,
 https://github.com/dustymabe[Dusty Mabe], Dev, Containers, 20%, EST,
 https://github.com/naina-verma[Naina Verma], QE, ALM/Plan, 50%, IST,
 https://github.com/pradeepto[Pradeepto Bhattacharya], Dev, Deploy, 20%, IST,
+https://github.com/sanbornsen[Sudipta Sen], Dev, UI, 100%, IST,
 |===
 
 
