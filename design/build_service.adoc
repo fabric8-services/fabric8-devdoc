@@ -1,0 +1,104 @@
+= Almighty Build stories
+
+== Entity Types
+
+* Build Job (Configuration)
+* Build Execution (a run)
+  ** Run Parameters
+  ** Build Results
+    *** Result Status
+      **** SUCCESS
+      **** FAILURE
+      **** ERROR
+    *** Reports
+    **** Code Coverage Reports
+    **** Test Reports
+    **** Publish Reports (ie. created binary artifact, pushed to artifact repository)
+    *** ..n artifacts with known types
+
+== Actions
+
+* CRUD Build Job (Do we expose this to the user?  Handle for them?  Handled by something else?)
+* Trigger Build Execution
+* Cancel Build Execution
+
+== Relationships
+
+* Build Job N:N Repository/Codebase
+* Build Job 1:N Build Execution
+* Build Execution 1:N Source Commits
+* Build Execution 1:1 Source Build Request
+* Build Execution N:1 Source PR
+* Build Execution N:N Issues
+* Build Execution 1:N Deployment
+* Build Execution 1:N Build Execution
+
+== User Stories
+
+As a user I would like to create an issue based on a failing test result
+
+
+
+As a user I would like to see which Build a particular Issue was part of
+
+
+
+	Commit msg scan
+
+	Build branch / PR
+
+
+
+As a user I would like to see the status of my build
+
+
+
+	Failed / In Progress ..
+
+
+
+As a user I would like to manually trigger a build
+
+	
+
+	An Action
+
+
+
+As a user I would like to create a new issue from a failed build
+
+
+
+	A ‘Reverse’ Action
+
+
+
+As a user I would like to see my current builds activity
+
+
+
+	Live view
+
+
+
+As a user I would like to see which build is deployed in production
+
+
+
+	Link from Build to Deployment
+
+
+
+As a user I would like to see the state of a builds test results and how it relates to my test plan
+
+
+
+	Test result processing / matching
+
+
+
+As a user I would like to be able to query for:
+
+* Issues included in a given build?
+* Issues resolved since last deployment?
+
