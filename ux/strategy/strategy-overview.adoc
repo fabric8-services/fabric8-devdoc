@@ -1,3 +1,5 @@
 = Strategy Assets
+
 link:https://redhat.invisionapp.com/boards/ZE2NIILDC2JUN/[Personas]
+
 link:https://redhat.invisionapp.com/boards/X92NIJMJGFZED/[General Strategy]
