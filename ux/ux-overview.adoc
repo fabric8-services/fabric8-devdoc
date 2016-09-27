@@ -5,3 +5,4 @@ User Experience is broken down into three different areas:
 - link:discovery/discovery-overview.html[discovery]
 - link:design/design-overview.html[design]
 - link:usability-testing/usability-overview.html[usability testing]
+- link:strategy/strategy-overview.html[strategy]
