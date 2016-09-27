@@ -15,7 +15,7 @@ Callback Support:
 
 * According to the requirement of Planner the best way is to have
 Asynchronous requests.
-* The Github Go library have a quite good support to do it through
+* The GitHub Go library have a quite good support to do it through
 channels and function callback as well.
 
 [[query]]
@@ -115,14 +115,14 @@ the user
 * Callback: Same as Query and lookup.
 
 [[github-golang-libraries]]
-Github Golang libraries
+GitHub Golang libraries
 ~~~~~~~~~~~~~~~~~~~~~~~
 [cols="7",options="header",]
 |===================================================================
 | | Completeness | Style | Community | Feature Support | Auth Support |
 Version
 
-| Go-Github
+| Go-GitHub
 https://github.com/google/go-github
 | Complete/Accomplish all functionalities which will be needed | Object
 oriented |
@@ -567,11 +567,11 @@ https://bugzilla.redhat.com/show_bug.cgi?id=978953
 [[sync-calls]]
 *Sync Calls:*
 
-* Run an external program to query Jira using REST, check the changes, sync to your application.
+* Run an external program to query JIRA using REST, check the changes, sync to your application.
 	** This approach requires you to implement the logic that the issue has been updated
 	** load on Jira for each polling.
 
-* Jira Command Line Interface
+* JIRA Command Line Interface
 	** good functionality
 	** launching the process every time can be a bit of a burden
 	** easy to debug and maintain
@@ -591,7 +591,7 @@ https://bugzilla.redhat.com/show_bug.cgi?id=978953
 [[query]]
 *Query:*
 
-* Jira REST API allows you to send a JQL query and recieve a subset of issues.
+* JIRA REST API allows you to send a JQL query and recieve a subset of issues.
 
 * We can:
     ** perform text search
@@ -601,7 +601,7 @@ https://bugzilla.redhat.com/show_bug.cgi?id=978953
 *Individual Lookup:*
 
 * User:
-    ** There is no direct method to get all users in Jira REST Api.
+    ** There is no direct method to get all users in JIRA REST Api.
     ** You can search for a particular user using string.
     **  https://servername/rest/api/2/user/search?username=a this returns all users that have "a" somewhere in their name
     **  Workaround:
@@ -667,7 +667,7 @@ curl -D- -u <username:password> -X GET -H "Content-Type: application/json" <url>
         + If your client can be reached via HTTP, choose Generic Application Type
         + Configure your client to support OAuth
     ** How to authenticate via OAuth:
-        + obtain request token from Jira
+        + obtain request token from JIRA
         + authorize this token
         + swap request token with access token
         + make authentication request to REST end point

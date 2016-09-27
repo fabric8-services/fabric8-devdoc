@@ -1,6 +1,6 @@
 # jekyll configuration
 
-title: "ALMighty-devdoc"
+title: "Almighty-devdoc"
 
 collections:
   blueprints:
