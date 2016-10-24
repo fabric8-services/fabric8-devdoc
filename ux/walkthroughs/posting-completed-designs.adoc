@@ -1,0 +1,52 @@
+= Design Posting Process
+
+image::../img/invision-link.png[]
+
+ When posting your work, use the URL from InVision’s Share feature and not the URL from the browser.
+
+*NOTE:* This URL will not change when you update the content of the prototype. It *will* change when you change the attributes on the prototype, such as allowing commenting. 
+
+== Post design artifacts* and links
+
+_*(artifacts include materials related to the design, discovery, workflows, wireframes, prototypes, visuals…)_
+
+. Post *InVision links* in the UXD JIRA stories
+. Post JIRA link in GIT story in almighty-ux
+- Once your story is pulled into an AppDev sprint, create an issue that includes a link to the JIRA story on https://github.com/almighty/almighty-ux/issues[https://github.com/almighty/almighty-ux/issues].
+. Post artifact links in GIT devdocs
+  .. Based on the type of artifact you want to link to, determine which ASCII doc** should be updated.
+
++
+     - Wireframes: link:almighty-devdoc/ux/design/wireframes/wireframes.adoc[almighty-devdoc/ux/design/wireframes/wireframes.adoc]
++
+     - Workflows: link:almighty-devdoc/ux/design/workflows/workflows.adoc[almighty-devdoc/ux/design/workflows/workflows.adoc]
++
+     - Visuals: link:almighty-devdoc/ux/design/visuals/visuals.adoc[almighty-devdoc/ux/design/visuals/visuals.adoc]
++
+- Discovery: link:almighty-devdoc/ux/discovery/discovery-overview.adoc[almighty-devdoc/ux/discovery/discovery-overview.adoc]
++
+- Strategy: link:almighty-devdoc/ux/strategy/strategy-overview.adoc[almighty-devdoc/ux/strategy/strategy-overview.adoc]
++
+- Usability: link:almighty-devdoc/ux/usability-testing/usability-overview.adoc[almighty-devdoc/ux/usability-testing/usability-overview.adoc]
+
+  .. Update the document to include a link to the artifact and a brief description of what it contains.
+
+ ASCII docs can be edited using most code editors. We recommend Atom or VSCode.
+
+== Communicate that designs are ready to review 
+
+Once a design artifact (whether new or updated) has been posted to InVision, let the team know that it is ready for review. 
+
+. Post to HipChat
+* On the Almighty UI/UX channel using @all, the *InVision link*, and a brief message.
+* On the Almighty channel using @here, the *InVision link*, and a brief message.
+. Post to email lists
+* Internal: Post here any sensitive materials to share with the internal group and/or when a design is in progress and you are working with development on specific solution issues:  mailto:devtools-almighty@redhat.com[devtools-almighty@redhat.com]
+* External: Post here when you have vetted the design through UXD and are ready for broader/public/community feedback: mailto:almighty-public@redhat.com[almighty-public@redhat.com]
+
+== Communicate that designs are ready for dev
+
+Once the design is complete and it has been reviewed and agreed upon by development and stakeholders, notify development that it’s ready.
+
+. On the pertinent issue in GIT, add the "Ready for Dev" label.
+. On that same issue, add a comment mentioning @joshuawilson and the developer on the feature.
