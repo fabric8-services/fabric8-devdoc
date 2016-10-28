@@ -1,10 +1,10 @@
 = Design Posting Process
 
-image::../img/invision-link.png[]
+image::invision-link.png[]
 
  When posting your work, use the URL from InVision’s Share feature and not the URL from the browser.
 
-*NOTE:* This URL will not change when you update the content of the prototype. It *will* change when you change the attributes on the prototype, such as allowing commenting. 
+*NOTE:* This URL will not change when you update the content of the prototype. It *will* change when you change the attributes on the prototype, such as allowing commenting.
 
 == Post design artifacts* and links
 
@@ -33,9 +33,9 @@ _*(artifacts include materials related to the design, discovery, workflows, wire
 
  ASCII docs can be edited using most code editors. We recommend Atom or VSCode.
 
-== Communicate that designs are ready to review 
+== Communicate that designs are ready to review
 
-Once a design artifact (whether new or updated) has been posted to InVision, let the team know that it is ready for review. 
+Once a design artifact (whether new or updated) has been posted to InVision, let the team know that it is ready for review.
 
 . Post to HipChat
 * On the Almighty UI/UX channel using @all, the *InVision link*, and a brief message.

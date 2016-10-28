@@ -6,7 +6,7 @@ Navigate to the shared link:https://redhat.invisionapp.com/share/6A8T2M2XB#/1933
 
 You will be presented with this screen:
 
-image:../img/walkthrough-01.png[]
+image::walkthrough-01.png[]
 
 There are two key areas to look for - *Comments* and *View All*
 
@@ -16,15 +16,15 @@ By default, commenting is turned off. If you wish to add comments to the screens
 
 === Turning On Comments:
 
-image:../img/walkthrough-02.png[]
+image:walkthrough-02.png[]
 
 Click the ‘Off’ switch in order to turn commenting on.
 
-image:../img/walkthrough-03.png[]
+image:walkthrough-03.png[]
 
 When turning comments to ‘ON’, the entire screen outlines in pink, matching the comment bubbles.
 
-image:../img/walkthrough-04.png[]
+image:walkthrough-04.png[]
 
 === Comment Areas
 
@@ -37,13 +37,13 @@ Once you have Comments turned on, there are multiple areas of importance.
 
 ===== Unread Comments
 
-image:../img/walkthrough-05.png[]
+image:walkthrough-05.png[]
 
 If you are new to the screen, or have previously commented on sections, you can see all of the New/Unviewed comments here.
 
 ===== Type of Comments
 
-image:../img/walkthrough-06.png[]
+image:walkthrough-06.png[]
 
 There are two types of views - *Comments* and *Tour Points* .
 
@@ -53,24 +53,24 @@ There are two types of views - *Comments* and *Tour Points* .
 
 ===== Resolved Comments
 
-image:../img/walkthrough-07.png[]
+image:walkthrough-07.png[]
 
 Resolved comments are comments that the creator has marked as resolved - either they have addressed the original commenter's thoughts, or they have communicated with the commenter properly in order to resolve what was done. Checking off this box shows those comments, so that you can see the historical path of the prototype screen.
 
 ===== Active Comments
 
-image:../img/walkthrough-08.png[]
+image:walkthrough-08.png[]
 
 Active comments are marked with a pink bubble, with a number inside. The number corresponds to the order in which the comments were made (#1 was first, #2 - second #3 - third, etc.).
 
 == View All Screens
 
-image:../img/walkthrough-09.png[]
+image:walkthrough-09.png[]
 
 Sometimes, you want to view all of the screens that are part of a prototype, or you want to jump to a specific screen. You can do so by click the ‘View All’ button.
 
 This will present all of the screens in a card view, with the current screen highlighted.
 
-image:../img/walkthrough-10.png[]
+image:walkthrough-10.png[]
 
 ** NOTE:* You cannot comment in this view. You will need to look at individual screens to add comments.

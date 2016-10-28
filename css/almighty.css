@@ -1,0 +1,51 @@
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  color: #363636;
+  font-size: 14px;
+}
+.top-bar {
+  background-color: #040404;
+  padding: 1rem;
+}
+.top-bar ul {
+  background-color: transparent;
+}
+.menu {
+  color: #eee;
+}
+.menu a {
+  color: #eee;
+}
+.prod-title {
+  font-size: 16px;
+  padding: 0;
+  text-transform: uppercase;
+}
+a {
+  color: #0088ce;
+  text-decoration: none;
+}
+a:active {
+  color: #3bb1dc;
+}
+a:focus, a:hover {
+  color: #0088ce;
+  text-decoration: underline;
+}
+.highlight {
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
+code {
+  padding: 6px 6px;
+  border-radius: 4px;
+}
+pre.CodeRay {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+table {
+  border-radius: 4px;
+}
