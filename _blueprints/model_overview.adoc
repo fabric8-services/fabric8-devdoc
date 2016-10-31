@@ -3,31 +3,72 @@
 [graphviz, model_overview, svg]
 ----
 digraph G {
-	USER -> LOGIN
-	
+	node [
+		shape = "record"
+	]
+
+  USER [label = "{User|}"]
+  LOGIN [label = "{Login|}"]
+  TEAM_ROLE [label = "{TeamRole|}"]
+  WORKITEM [label = "{WorkItem|}"]
+  TEAM [label = "{Team|}"]
+  PERMISSION [label = "{Permission|}"]
+  PROJECT [label = "{Project|}"]
+  WORKITEM_TYPE [label = "{WorkItemType|}"]
+  CATEGORY [label = "{Category|}"]
+  LINK [label = "{Link|}"]
+  LINK_TYPE [label = "{LinkType|}"]
+  REPOSITORY [label = "{Repository|}"]
+  ORGANIZATION [label = "{Organization|}"]
+  AREA [label = "{Area|}"]
+  ITERATION [label = "{Iteration|}"]
+
+	edge [
+		arrowhead = "none"
+		headlabel = "n"
+		taillabel = "1"
+	]
 	USER -> TEAM_ROLE
-	LOGIN -> WORKITEM[label="CUD|Assigned"]
-	
 	TEAM_ROLE -> TEAM
-	TEAM_ROLE -> PERMISSION
-	PERMISSION -> PROJECT
-
-	ORGANIZATION -> TEAM
-	ORGANIZATION -> PROJECT
-	ORGANIZATION -> ORGANIZATION
-
+	TEAM -> PROJECT
 	PROJECT -> WORKITEM
 	PROJECT -> REPOSITORY
-
+	WORKITEM_TYPE -> WORKITEM
+	LINK_TYPE -> LINK
+	CATEGORY -> WORKITEM_TYPE
+	ORGANIZATION -> ORGANIZATION
+	AREA -> AREA
+	ITERATION -> ITERATION
+	TEAM -> ORGANIZATION
+	PROJECT -> ORGANIZATION
 	WORKITEM -> AREA
 	WORKITEM -> ITERATION
-	WORKITEM -> WORKITEM_TYPE
-	WORKITEM -> LINK
-	WORKITEM_TYPE -> WORKITEM_FAMILY
+	USER -> LOGIN
 
-	AREA -> AREA [label="path"]
-	ITERATION -> ITERATION [label="path"] 
+	edge [
+		arrowhead = "none"
+		headlabel = "1"
+		taillabel = "1"
+	]
+
+	edge [
+		arrowhead = "none"
+		headlabel = "m"
+		taillabel = "n"
+	]
+	TEAM_ROLE -> PERMISSION
+	PERMISSION -> PROJECT
+	LOGIN -> WORKITEM
+	AREA -> TEAM
+
+	edge [
+		arrowhead = "none"
+		headlabel = "2"
+		taillabel = "1"
+	]
 	LINK -> WORKITEM
-	LINK -> LINK_TYPE
+
 }
 ----
+
+
