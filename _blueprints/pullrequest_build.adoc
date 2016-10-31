@@ -1,0 +1,14 @@
+= Pull Request to Build
+
+[plantuml,pullrequest-protocol]
+....
+GitPush -> GitHubWebHook:GH
+GitHubWebHook -> CodeHostService:GH
+CodeHostService -> WorkItemStorage:PullRequestWI
+WorkItemStorage -> MessageBus:PullRequestEvent
+MessageBus -> CodeBuildService:PullRequestEvent
+CodeBuildService -> WorkItemStorage:BuildRequestWI
+WorkItemStorage -> MessageBus:BuildRequestEvent
+MessageBus -> BuildService:BuildRequestEvent
+BuildService -> OpenShiftPipline:JenkinsRequest
+....
