@@ -35,13 +35,13 @@ Once you have Comments turned on, there are multiple areas of importance.
 . Resolved Comments
 . Active Comments
 
-===== Unread Comments
+==== Unread Comments
 
 image:walkthrough-05.png[]
 
 If you are new to the screen, or have previously commented on sections, you can see all of the New/Unviewed comments here.
 
-===== Type of Comments
+==== Type of Comments
 
 image:walkthrough-06.png[]
 
@@ -51,13 +51,13 @@ There are two types of views - *Comments* and *Tour Points* .
 
 *Tour Points* are specific items that the creator has highlighted in order to direct the reviewer (you) through the prototype screen(s).
 
-===== Resolved Comments
+==== Resolved Comments
 
 image:walkthrough-07.png[]
 
 Resolved comments are comments that the creator has marked as resolved - either they have addressed the original commenter's thoughts, or they have communicated with the commenter properly in order to resolve what was done. Checking off this box shows those comments, so that you can see the historical path of the prototype screen.
 
-===== Active Comments
+==== Active Comments
 
 image:walkthrough-08.png[]
 

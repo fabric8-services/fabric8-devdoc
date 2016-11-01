@@ -16,7 +16,7 @@ Some links might not be fully public, but we will get them moved over as soon as
 
 We are currently on hipchat (almighty room), with plans on moving to a publicly hosted mattermost or similar platform soon(tm)!
 
-Mailing list - we have a public mailing list `mailto:almighty-public@redhat.com[almighty-public@redhat.com]`.  You may subscribe `https://www.redhat.com/mailman/listinfo/almighty-public[here]`.
+Mailing list - we have a public mailing list `mailto:almighty-public@redhat.com[almighty-public@redhat.com]`.  You may subscribe https://www.redhat.com/mailman/listinfo/almighty-public[here].
 
 == Team
 

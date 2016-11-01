@@ -16,11 +16,11 @@ body {
 .menu a {
   color: #eee;
 }
-.prod-title {
-  font-size: 16px;
+.project-title {
+  font-size: 20px;
   padding: 0;
-  text-transform: uppercase;
 }
+>>>>>>> Stashed changes
 a {
   color: #0088ce;
   text-decoration: none;
