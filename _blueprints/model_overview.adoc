@@ -1,74 +1,49 @@
 = Model Overview
 
-[graphviz, model_overview, svg]
+[plantuml, uml_overview, svg]
 ----
-digraph G {
-	node [
-		shape = "record"
-	]
+hide members
 
-  USER [label = "{User|}"]
-  LOGIN [label = "{Login|}"]
-  TEAM_ROLE [label = "{TeamRole|}"]
-  WORKITEM [label = "{WorkItem|}"]
-  TEAM [label = "{Team|}"]
-  PERMISSION [label = "{Permission|}"]
-  PROJECT [label = "{Project|}"]
-  WORKITEM_TYPE [label = "{WorkItemType|}"]
-  CATEGORY [label = "{Category|}"]
-  LINK [label = "{Link|}"]
-  LINK_TYPE [label = "{LinkType|}"]
-  REPOSITORY [label = "{Repository|}"]
-  ORGANIZATION [label = "{Organization|}"]
-  AREA [label = "{Area|}"]
-  ITERATION [label = "{Iteration|}"]
+class User 
+class Login
+class TeamRole
+class WorkItem
+class Team
+class Permission
+class Project
+class WorkItemType
+class Category
+class Link
+class LinkType
+class Repository
+class Organization
+class Area
+class Iteration
 
-	edge [
-		arrowhead = "none"
-		headlabel = "n"
-		taillabel = "1"
-	]
-	USER -> TEAM_ROLE
-	TEAM_ROLE -> TEAM
-	TEAM -> PROJECT
-	PROJECT -> WORKITEM
-	PROJECT -> REPOSITORY
-	WORKITEM_TYPE -> WORKITEM
-	LINK_TYPE -> LINK
-	CATEGORY -> WORKITEM_TYPE
-	ORGANIZATION -> ORGANIZATION
-	AREA -> AREA
-	ITERATION -> ITERATION
-	TEAM -> ORGANIZATION
-	PROJECT -> ORGANIZATION
-	WORKITEM -> AREA
-	WORKITEM -> ITERATION
-	USER -> LOGIN
+User -> TeamRole
+TeamRole "1" -- "n" Team
+Team "1" -- "n" Project
+Project "1" -- "n" WorkItem
+Project "1" -- "n" Repository
+WorkItemType "1" -- "n" WorkItem
+LinkType "1" -- "n" Link
+Category "1" -- "n" WorkItemType
+Organization "1" -- "n" Organization
+Area "1" -- "n" Area
+Iteration "1" -- "n" Iteration
+Team "1" -- "n" Organization
+Project "1" -- "n" Organization
+WorkItem "1" -- "n" Area
+WorkItem "1" -- "n" Iteration
+User "1" -- "n" Login
 
-	edge [
-		arrowhead = "none"
-		headlabel = "1"
-		taillabel = "1"
-	]
+TeamRole "n" -- "m" Permission
+Permission "n" -- "m" Project
+Login "n" -- "m" WorkItem
+Area "n" -- "m" Team
 
-	edge [
-		arrowhead = "none"
-		headlabel = "m"
-		taillabel = "n"
-	]
-	TEAM_ROLE -> PERMISSION
-	PERMISSION -> PROJECT
-	LOGIN -> WORKITEM
-	AREA -> TEAM
+Link "1" -- "2" WorkItem
 
-	edge [
-		arrowhead = "none"
-		headlabel = "2"
-		taillabel = "1"
-	]
-	LINK -> WORKITEM
-
-}
 ----
 
 
