@@ -10,14 +10,14 @@ This step is *optional*, you can just go directly to [How to run it].
 
 ```
 $ cd almighty-devdoc
-$ docker build -t maxandersen/almighty-devdoc .
+$ docker build -t almighty-devdoc-builder .
 ```
 
 == How to run it
 
 ```
 $ cd almighty-devdoc
-$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc
+$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc-builder
 ```
 
 This will automatically run jekyll with livereload enabled.
