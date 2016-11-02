@@ -40,8 +40,8 @@ cp -rfv _site/* .
 rm -rf _site
   
 # Update new repo with generated code
-git config user.name "ci.centos.org"
-git config user.email "almighty-public@redhat.com"
+#git config user.name "ci.centos.org"
+#git config user.email "almighty-public@redhat.com"
 git add --ignore-removal --all .
 
 #TODO add more context to msg
