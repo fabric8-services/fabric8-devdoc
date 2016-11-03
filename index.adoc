@@ -2,7 +2,7 @@
 
 Welcome to the Almighty developer documentation site.
 
-Almighty is a project started by Red Hat to create an opensource ALM covering
+Almighty is a project started by Red Hat to create an opensource tool covering
 the lifecycle from ideation, development, production to sunsetting of an application.
 
 We are still getting started, so bear with us :)
