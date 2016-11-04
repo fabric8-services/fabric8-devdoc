@@ -39,6 +39,10 @@ git checkout -b gh-pages origin/gh-pages
 cp -rfv _site/* .
 rm -rf _site
   
+echo "Dump ls"
+pwd
+ls -l
+
 # Update new repo with generated code
 git config user.name "ci.centos.org"
 git config user.email "almighty-public@redhat.com"
