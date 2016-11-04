@@ -48,6 +48,7 @@ https://github.com/pradeepto[Pradeepto Bhattacharya], Dev, Deploy, 20%, IST
 https://github.com/sanbornsen[Sudipta Sen], Dev, UI, 100%, IST
 |===
 
+
 (If you feel you are missing from the above list, please make a pull-request to update.)
 
 == Resources
