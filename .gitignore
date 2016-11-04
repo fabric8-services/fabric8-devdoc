@@ -9,3 +9,4 @@ Gemfile.lock
 *.swp
 .project
 .idea
+.DS_Store
