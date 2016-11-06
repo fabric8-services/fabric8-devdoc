@@ -1,0 +1,234 @@
+= Almighty Build
+
+== Goals of this Document
+
+This document is the output of the preliminary work on the build system concepts. It serves as a guideline for the further development and contains in terms of the build service: 
+
+. Definition and Scope
+. Concept for the Build SPI contract between Almighty and Build Providers
+. Concept for the Build Domain Objects and Service Operations known by Almighty
+. Concept for the operations the Build Service exposes through the Almighty Public API
+. Concept for the integration of Build Provider UI components into Almighty UI
+. Definition of necessary next steps
+
+The definitions in this document are conceptual definitions that must be developed into requirements suitable for implementation. See the #heading=h.9iivc7b8xlgg[Next steps] section for a list of necessary following steps.
+
+== Definition of the Build Service
+
+The Build Service provides user with a scriptable way to *transform* repository source *code* into artifacts, actions, or both. 
+
+To be more specific let’s look at a specific scenario covered by Build Service:
+
+. Take a git revision
+. Build the application
+. Run the unit tests
+. Create the Docker image(s)
+. Deploy them to a development/staging environment
+. Run integration tests against it
+. Optional: ask user for approval
+. Deploy to the production environment (even into different clusters like OpenShift Online)
+
+Of course, this is just a quick example and this is fully customizable by user.
+
+Build Service is not just about building artifacts but also about performing actions with them to e.g. implement CI/CD.
+
+There is already a similar concept implemented in OpenShift called *Pipelines* . But, for this project, we want to be more generic and provide users with a Build Service with *pluggable providers* . That's why we are creating Build Provider Interface; to abstract the provider specifics away. Generally speaking regular build (non-pipeline) job looks like a pipeline of 0 stages, which is a valid pipeline.
+
+== Scope
+
+Although there will be different providers in the future, we will start by implementing "OpenShift Build Provider" (OSBP) that will use OpenShift's pipelines.
+
+The scope of the build system contains two distinct components or areas which can be worked on in parallel:
+
+* *Almighty Build Service* 
++
+The service integrated in the Almighty core that holds the build lifecycle/processes and provides the SPI and API.
++
+
+* *OpenShift Build provider (OSBP)* 
++
+An implementation of the SPI with OpenShift as build provider with the service-level integration parts.
+
+The scope of this document is to define basic concepts and contract requirements to enable the fine-granular development of the SPI definitions and other specifications. Goal is, that this document can be used to spread out development in the next iterations with common definitions set.
+
+== Userstories
+
+The overall workflow defines outlines of possible user stories for the Almighty system. They describe the possible actions users can take on the build system from the users perspective.
+
+=== S01 Registering Build Providers
+
+The Build Providers can be configured by the administrator on the installation level. This configuration includes all non-user non-project settings needed to use the 3rd party build provider by projects in the system. The default build provider is OpenShift running on the same instance the system is running on.
+
+The configuration is done by configuration files on installation/infrastructure level.
+
+=== S02 Configuring environments at user level
+
+The user can configure the build environment for project at user level. The settings include the association and/or authentication for the build provider account. For example: the user configures the "connection" along with the authentication for the OpenShift user (identified by OAuth URL and name). The user can also configure additional settings as needed by the build provider at user level.
+
+image::configuserlevel.png[]
+Image: Configuration of Environments at User Level
+
+For the configuration a generic configuration UI is provided that is identical regardless of used build provider.
+
+=== S03 Creating Build Configurations for a Project
+
+A user can add a build configurations to a project by selecting from the available build providers and the build environment. The user can also give a set of key-value (also binary) parameters to the build provider that specifies further configuration. For example oAuth resources for accessing deployment environments.
+
+image::configdataflow.png[]
+Image: Configuration Data Flow
+
+The system then creates build configuration files in the repository. If there is no configuration file (in case of OSPB Jenkinsfile) in his repository, he will be provided with a choice to bootstrap build configuration in his repository on his behalf. There is an option that this file is just named differently or specifying that the file is in a subfolder.
+
+As there may be multiple repositories per project, the user is able to create separate build configurations for each repository.
+
+Configurations can be configured on runtime by parameters. This parameters may include credentials for authenticating against external deployment sites or other runtime settings. The settings can be configured using a generic build UI.
+
+image::projectbuildconfigdataflow.png[]
+Image: Project Build Configuration Data Flow
+
+The details of the deployment (Canary, Blue-Green or other) is determined by the build configuration and is out-of-scope of the ALM build system. Also, the build system contains no dependency management for build jobs on multi-repository projects. So there is no means of configuring followup builds in the ALM system. It is possible, though, that the build itself, configured in the build configuration files, triggers a followup build using some means, possibly a later webhook in the ALM system.
+
+*For private GitHub repositories*.footnote:[ see mailing list discussion here: https://www.redhat.com/archives/almighty-public/2016-October/msg00110.html&sa=D&ust=1477567580676000&usg=AFQjCNEA1AUUb8L54soCYBUBN5V75dq3Hw[https://www.redhat.com/archives/almighty-public/2016-October/msg00110.html&sa=D&ust=1477567580676000&usg=AFQjCNEA1AUUb8L54soCYBUBN5V75dq3Hw]], the project configuration contains a ssh secret key that is used to access the private repository. The user gets a notification with the public key and is noted that he has to add the public key to the deploy keys on his git provider. As this procedure is not specific for OpenShift or GitHub, the needed UI dialogs are also generic. As an option, if the repository and/or build provider supports this, the key exchange can be done automatically via a provided API.footnote:[ For example: https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key[https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key]].
+
+=== S04 Starting and Controlling Build Processes
+
+A user has basic control over the build process. The user can start and cancel/stop the build process using the UI. He can also see the current state of a process instance (“running”, “successfully terminated”, “failed terminated”). Using a history, the user can see which builds have been executed before. 
+
+image::startstopbuild.png[]
+Image: Starting/Stopping Build
+
+By default, a build is triggered by changes to the repository, for example source code commits.
+
+=== S05 Retrieving Logging Information
+
+A user can browse build logs of any build in the build history. He can also see live logs of running build processes. The user can also download logs from prior builds.
+
+The returned logging information might be structured, like a JSON structure to enable the ALM system to provide more detailed insight into the returned data. For example, the system could provide detailed reports on unit test results with links to the test implementations.
+
+== Components
+
+This section describes the components the system needs to provide or expects from a 3rd party. The section serves as a fulfilment list for specifying and implementing the build service.
+
+=== ALM Build Service
+
+The Build Service is the ALM-side component that controls the build process. It represents the core module inside the ALM system that directly communicates with the build UI on one side and with the server side SPI implementation on the other side. 
+
+The Build Service implements the basic processes involving registering/creating a build configuration, starting and stopping a build and getting runtime informations about build processes. The Build Service is the controlling entity in these processes.
+
+The Build Service consists of several sub-components described as follows.
+
+==== Authentication
+
+The Build Service verifies and stores that all OAuth tokens involved in the communication process with 3rd party services like build providers. The authentication service checks if tokens are valid (not expired) before calling a build provider service via the SPI and refresh them in cooperation with UI if needed.
+
+The authentication component is also responsible for registering and attaching the build providers to the ALM system. This involves communication via the SPI with the 3rd party systems.
+
+==== ALM UI
+
+The ALM Build UI is the main interface for users to the build processes. The user can create build configurations, start and stop build processes and monitor progress (see above for user stories).
+
+As the provider-specific configuration is contained in the editable configuration files in the source code repository, no build provider specific UI is needed at this point. A generic build UI is used.
+
+=== SPIs of the ALM Build Service
+
+The ALM Build Service contains a Service Provider Interface (SPI) that interconnects the ALM Build Service to the (possibly) 3rd party build providers using a well defined interface. The interface consists of a technical REST api, a procedure for registering new build providers to the ALM Build Service and a set of interactions modelled as REST flows for the various user operations (see above).
+
+==== SPI Architecture.footnote:[ Discussion on different approaches here: https://www.google.com/url?q=https://www.redhat.com/archives/almighty-public/2016-October/msg00128.html&sa=D&ust=1478189307991000&usg=AFQjCNHaozEeVwWN0yJqaso6RREngoUtyA[https://www.google.com/url?q=https://www.redhat.com/archives/almighty-public/2016-October/msg00128.html&sa=D&ust=1478189307991000&usg=AFQjCNHaozEeVwWN0yJqaso6RREngoUtyA]]
+
+The SPI is modelled following a “consumer” model. The SPI defines a set of REST operations that are consumed from the actual build provider. So the SPI expects the build provider (or an intermediate party) to provide this interface for consumption.
+
+==== Logical SPI Operations.footnote:[ Preliminary specification here: https://www.google.com/url?q=https://github.com/tnozicka/almighty-devdoc/blob/add-build-spi-definition/design/build_spi.adoc&sa=D&ust=1478189307979000&usg=AFQjCNGzUBbihwXQH4rvWNoRfTY0w48kBA[https://www.google.com/url?q=https://github.com/tnozicka/almighty-devdoc/blob/add-build-spi-definition/design/build_spi.adoc&sa=D&ust=1478189307979000&usg=AFQjCNGzUBbihwXQH4rvWNoRfTY0w48kBA]]
+
+The SPI defines operations for the user stories above. Note that the following list only describes logical operations that may be different (or removed) in a final SPI specification:
+
+* *CONNECT* 
++
+Onetime association/connection of user accounts in ALM and 3rd party build provider. This might be a series of operations. (See S02 above).
++
+PRECONDITION: none.
++
+POSTCONDITION: token/authN info for the build provider known to ALM.
+
+* *DISCONNECT* 
++
+Disconnection of previously associated accounts.
++
+PRECONDITION: associated accounts (with CONNECT) with stored data.
++
+POSTCONDITION: removed authN credentials/data on both sides of the SPI interfacing.
+
+* *CREATE_BUILD_CONFIG* 
++
+Creates a build configuration in the repository (in the form of files) and stores the build configuration parameters in storage.
++
+PRECONDITION: associated accounts (with CONNECT), existing project, selected one (of possibly many) repository on the project.
++
+POSTCONDITION: build configuration in repository, parameters in storage, possibly created pipelines or other preconditions for START_BUILD on 3rd party build provider.
++
+NOTE: updating build configuration is omitted on this abstraction level, has to be present in implementation.
+
+* *START_BUILD* 
++
+Starts a build using the build config created previously.
++
+PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG).
++
+POSTCONDITION: running build with handle to getting info on/controlling it.
+
+* *STOP_BUILD* +
+Stops a build using the build config created previously.
++
+PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), running build (using START_BUILD).
++
+POSTCONDITION: running build with handle to getting info on/controlling it.
+
+* *GET_BUIL* *D* *_STATUS* 
++
+Gets a status on a running build created using the build config created previously.
++
+PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), running build (using START_BUILD).
++
+POSTCONDITION: retrieved build status (and possibly more metadata).
+
+* *GET_BUILD_LOG* +
+Gets console log on a running or stopped build created using the build config created previously. This interface is streaming and returns data as it is generated.
++
+PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), selected build (using START_BUILD, either current or historic build).
++
+POSTCONDITION: retrieved build/console log.
+
+* *GET_BUILD_ARTIFACT* +
+Retrieves a build artifact after a build has ended. Build artifacts can be of different type. For example, the test log is also a build artifact that can be retrieved. Note: this interface will likely be multiple methods for retrieving multiple artifacts with different types, like retrieve indexes, artifacts by type or other means. 
++
+A returned build artifact includes the type and the build artifact data or a link to a resource.
++
+PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), selected build (using START_BUILD, either current or historic build), completed build.
++
+POSTCONDITION: retrieved artifact data.
+
+=== Build Providers
+
+The Build Provider is the remote 3rd party component that implements/uses the defined SPI to expose build services for ALM-hosted projects.
+
+== Next steps
+
+We need to define next steps for making the build service a reality. The goal of this section is to define specific action items that can be transformed into work items for future sprints.
+
+For the next sprints, the following definitions have to be made:
+
+* *SPI Interfacing* 
++
+The overall architecture for the build system and the communication flows between the components on a detailed level.
+
+* *Authentication Flows/APIs* +
+AuthN (and possibly AuthZ) definitions and their control and data flows on a detailed level.
+
+* *SPI API* +
+The REST api that is provided by the build providers.
+
+* *Internal Build Service API* 
++
+The internal API provided by the build system to the rest of the ALM system.
+
+* *User Stories and UX Flows* +
+The implementation user stories and their requirements, including the UX requirements.
