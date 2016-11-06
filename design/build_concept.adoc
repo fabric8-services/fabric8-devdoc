@@ -65,7 +65,7 @@ The configuration is done by configuration files on installation/infrastructure 
 
 The user can configure the build environment for project at user level. The settings include the association and/or authentication for the build provider account. For example: the user configures the "connection" along with the authentication for the OpenShift user (identified by OAuth URL and name). The user can also configure additional settings as needed by the build provider at user level.
 
-image::configuserlevel.png[]
+image::images/configuserlevel.png[]
 Image: Configuration of Environments at User Level
 
 For the configuration a generic configuration UI is provided that is identical regardless of used build provider.
@@ -74,7 +74,7 @@ For the configuration a generic configuration UI is provided that is identical r
 
 A user can add a build configurations to a project by selecting from the available build providers and the build environment. The user can also give a set of key-value (also binary) parameters to the build provider that specifies further configuration. For example oAuth resources for accessing deployment environments.
 
-image::configdataflow.png[]
+image::images/configdataflow.png[]
 Image: Configuration Data Flow
 
 The system then creates build configuration files in the repository. If there is no configuration file (in case of OSPB Jenkinsfile) in his repository, he will be provided with a choice to bootstrap build configuration in his repository on his behalf. There is an option that this file is just named differently or specifying that the file is in a subfolder.
@@ -83,7 +83,7 @@ As there may be multiple repositories per project, the user is able to create se
 
 Configurations can be configured on runtime by parameters. This parameters may include credentials for authenticating against external deployment sites or other runtime settings. The settings can be configured using a generic build UI.
 
-image::projectbuildconfigdataflow.png[]
+image::images/projectbuildconfigdataflow.png[]
 Image: Project Build Configuration Data Flow
 
 The details of the deployment (Canary, Blue-Green or other) is determined by the build configuration and is out-of-scope of the ALM build system. Also, the build system contains no dependency management for build jobs on multi-repository projects. So there is no means of configuring followup builds in the ALM system. It is possible, though, that the build itself, configured in the build configuration files, triggers a followup build using some means, possibly a later webhook in the ALM system.
@@ -94,7 +94,7 @@ The details of the deployment (Canary, Blue-Green or other) is determined by the
 
 A user has basic control over the build process. The user can start and cancel/stop the build process using the UI. He can also see the current state of a process instance (“running”, “successfully terminated”, “failed terminated”). Using a history, the user can see which builds have been executed before. 
 
-image::startstopbuild.png[]
+image::images/startstopbuild.png[]
 Image: Starting/Stopping Build
 
 By default, a build is triggered by changes to the repository, for example source code commits.
