@@ -65,7 +65,7 @@ The configuration is done by configuration files on installation/infrastructure 
 
 The user can configure the build environment for project at user level. The settings include the association and/or authentication for the build provider account. For example: the user configures the "connection" along with the authentication for the OpenShift user (identified by OAuth URL and name). The user can also configure additional settings as needed by the build provider at user level.
 
-image::images/configuserlevel.png["Configuration of Environments at User Level",float="center"]
+image::images/configsuserlevel.png["Configuration of Environments at User Level",float="center"]
 
 For the configuration a generic configuration UI is provided that is identical regardless of used build provider.
 
