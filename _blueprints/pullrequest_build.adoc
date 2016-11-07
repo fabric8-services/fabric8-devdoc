@@ -10,5 +10,5 @@ MessageBus -> CodeBuildService:PullRequestEvent
 CodeBuildService -> WorkItemStorage:BuildRequestWI
 WorkItemStorage -> MessageBus:BuildRequestEvent
 MessageBus -> BuildService:BuildRequestEvent
-BuildService -> OpenShiftPipline:JenkinsRequest
+BuildService -> OpenShiftPipeline:JenkinsRequest
 ....
