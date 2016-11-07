@@ -1,4 +1,4 @@
-= Almighty Build stories
+= Build stories
 
 == Entity Types
 
