@@ -27,6 +27,7 @@ Project "1" -- "n" WorkItem
 Project "1" -- "n" Repository
 WorkItemType "1" -- "n" WorkItem
 LinkType "1" -- "n" Link
+LinkType "1" -- "n" LinkCategory
 Category "1" -- "n" WorkItemType
 Organization "1" -- "n" Organization
 Area "1" -- "n" Area
