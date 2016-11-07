@@ -25,15 +25,13 @@ end
 desc "Serve and watch the site (with post limit or drafts)"
 task :watch, :option do |t, args|
   option = args[:option]
-  ## Could add --incremental here but it seem to have problems
-  ## with subpages and livereload. 
   if option.nil? or option.empty?
-    execute("jekyll liveserve --watch")
+    execute("jekyll serve --watch")
   else
     if option == "drafts"
-      execute("jekyll liveserve --watch --drafts")
+      execute("jekyll serve --watch --drafts")
     else
-      execute("jekyll liveserve --watch --limit_posts #{option}")
+      execute("jekyll serve --watch --limit_posts #{option}")
     end
   end
 end
