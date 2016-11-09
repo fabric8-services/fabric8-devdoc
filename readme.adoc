@@ -4,20 +4,16 @@ Development documentation site for almighty.
 
 Pushes to this site is automatically published to http://devdoc.almighty.io
 
-== How to build it
+== Requirements
 
-This step is *optional*, you can just go directly to [How to run it].
-
-```
-$ cd almighty-devdoc
-$ docker build -t maxandersen/almighty-devdoc .
-```
+Install Docker.
 
 == How to run it
 
 ```
 $ cd almighty-devdoc
-$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc
+$ docker build -t almighty-devdoc-builder .
+$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc-builder
 ```
 
 This will automatically run jekyll with livereload enabled.
@@ -28,7 +24,7 @@ the browser will automatically reload.
 If you want finer control you can run bash directly:
 
 ```
-$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc /bin/bash
+$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc-builder /bin/bash
 ```
 
 And from within here run `rake` or any other command.
