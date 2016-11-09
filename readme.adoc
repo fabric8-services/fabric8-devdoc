@@ -6,24 +6,29 @@ Pushes to this site is automatically published to http://devdoc.almighty.io
 
 == How to build it
 
-```
-pip install blockdiag
-```
-
-This site is using jekyll, if you already have it installed you can the following:
+This step is *optional*, you can just go directly to [How to run it].
 
 ```
-bundle install
-bundle exec jekyll build
-```
-In case of Fedora 24, one will need following.
-Tracked from https://github.com/almighty/almighty-devdoc/issues/43[issue-43], https://github.com/almighty/almighty-devdoc/issues/44[issue-44]
-```
-sudo dnf install gcc ruby-devel gcc-c++ redhat-rpm-config 'graphviz*'
+$ cd almighty-devdoc
+$ docker build -t maxandersen/almighty-devdoc .
 ```
 
-To serve the site and check how it looks in the browser:
+== How to run it
 
 ```
-jekyll serve
+$ cd almighty-devdoc
+$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc
 ```
+
+This will automatically run jekyll with livereload enabled.
+
+Goto http://localhost:4000 to see the generated ccontent and if you have livereload plugin installed
+the browser will automatically reload.
+
+If you want finer control you can run bash directly:
+
+```
+$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc /bin/bash
+```
+
+And from within here run `rake` or any other command.

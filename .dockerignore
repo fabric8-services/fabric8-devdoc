@@ -1,0 +1,4 @@
+# exclude everything from Docker except gemfile's that specify dependencies needed.
+/*
+!/Gemfile
+!/Gemfile.lock

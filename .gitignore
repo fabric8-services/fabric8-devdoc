@@ -3,9 +3,7 @@
 /.bundle/
 /tmp/
 *.bundle
-Gemfile.lock
 *.cache
-.ruby-*
 *.swp
 .project
 .idea
