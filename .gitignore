@@ -8,3 +8,4 @@
 .project
 .idea
 .DS_Store
+jenkins-env
