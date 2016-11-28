@@ -1,4 +1,5 @@
 = Build Concepts
+:imagesdir: images/
 
 == Goals of this Document
 
