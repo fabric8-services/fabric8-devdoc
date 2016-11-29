@@ -1,0 +1,18 @@
+= Build SPI Architecture
+:imagesdir: images/
+
+The Build SPI architecture diagram describes the component architecture with data/control flows between the stakeholders ALM, client, and 
+build provider (3rd party). Core component is the build system located in the ALM system. The build system provides the Build API that provides abstract
+build services to other ALM components and controls the build provider component at the 3rd party system.
+
+The build provider is a "proxy" component that controls the actual build environment located at the build provider system(s). The build provider
+component implements the SPI API and may be provided by the 3rd party but can also be provided in a proxy model by a 4th party (or RH as part of
+the ALM offering).
+
+image::spiarchitecture.png["SPI Architecture",float="center"]
+
+The ALM UI instance running in the users browser only communicates with the ALM systems and the build service API. On exception is the aquisition
+of the build provider credentials for accessing the build provider services. For the current ALM system, this will be implemented by an OAuth flow 
+that directly communicates with the build environment (not the provider as it may not be located in the responsibility sphere of the 3rd party system),
+aquires the OAuth token and submits it to the ALM build system via the build service API. The build service then uses that token to access the build
+provider and the build environment.
