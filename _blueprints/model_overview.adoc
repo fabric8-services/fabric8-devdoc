@@ -1,4 +1,9 @@
 = Model Overview
+:imagesdir: images/
+
+image::datamodel.png["Data Model",float="center"]
+
+In inline UML:
 
 [plantuml, uml_overview, svg]
 ----
@@ -15,36 +20,42 @@ class WorkItemType
 class Category
 class Link
 class LinkType
+class LinkCategory
 class Repository
 class Organization
 class Area
 class Iteration
 
-User -> TeamRole
-TeamRole "1" -- "n" Team
-Team "1" -- "n" Project
-Project "1" -- "n" WorkItem
-Project "1" -- "n" Repository
-WorkItemType "1" -- "n" WorkItem
-LinkType "1" -- "n" Link
-LinkType "1" -- "n" LinkCategory
-Category "1" -- "n" WorkItemType
-Organization "1" -- "n" Organization
-Area "1" -- "n" Area
-Iteration "1" -- "n" Iteration
-Team "1" -- "n" Organization
-Project "1" -- "n" Organization
-WorkItem "1" -- "n" Area
-WorkItem "1" -- "n" Iteration
-User "1" -- "n" Login
+User "0..1" <-> "0..*" Project
+User "1" -> "1..*" TeamRole
+User "1" <-> "1..*" Login 
 
-TeamRole "n" -- "m" Permission
-Permission "n" -- "m" Project
-Login "n" -- "m" WorkItem
-Area "n" -- "m" Team
+WorkItem "0..*" -> "1..*" Login
 
-Link "1" -- "2" WorkItem
+TeamRole "1..*" -> "0..*" Permission
+Team "1" -> "1..*" TeamRole
 
-----
+Area "0..1" -> "0..*" Area 
+Team "0..*" -> "0..*" Area
+Area "1..*" <-> "1" WorkItem
 
+Team "1..*" <-> "1" Project
+Team "1..*" <-> "1" Organization 
+
+Project "1..*" <-> "1" Organization
+Project "0..1" <-> "0..*" WorkItem
+Project "1" <-> "0..*" Repository
+Permission "0..*" -> "0..*" Project
+
+WorkItem "0..*" <-> "0..1" Iteration
+WorkItem "0..*" -> "1" WorkItemType
+WorkItem "2" <-> "0..*" Link
+
+Iteration "0..1" -> "0..*" Iteration 
+
+WorkItemType "0..*" -> "1" Category
+
+Link "0..*" -> "1" LinkType
+
+LinkType "1" <-> "1..*" LinkCategory  
 
