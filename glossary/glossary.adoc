@@ -1,0 +1,176 @@
+= Glossary
+
+== Specific terminology
+
+ALM::  Application lifecycle management.
+A/B testing:: A/B  testing is usually a form of data driven testing in which a given outcome is measured and compared to previous test result to determine if an improvement was made or not. Often used as a synonym for multi-variant testing.
+Backlog:: In agile terms, an identified list of things that need to be done relevant to a given business objective. Usually scoped to a larger organizational objective.
+Blue/Green deployment strategy:: In this deployment strategy two target environments are deployed to in an alternating manner, thus allowing to always revert to the previous deployment in the face of a bad deployment
+Continuous value delivery:: Refers to the idea of delivering working software features at the end of each sprint in a scrum agile process
+Continuous deployment:: Refers to the process of automatically deploying software changes in a system as they occur instead of larger release cycles.
+Canary deployment strategy:: In this deployment strategy , some fraction of the deployment environment is updated with a new change. If all goes well, then the rest of the environment is updated. This allows for testing of experimental features in a production environment.
+Dashboard:: A user interface concept in which a person can view a collections of important aspects of a system on a single page in near real time, just as you would in a car dashboard.
+DevOps:: A word used to describe the combination of  development and operations responsibilities into a single responsibility performed by a cross functional team.
+Experience:: The user centric usage experience that the user has while interacting with the system
+Extensibility model:: There are two ways to extend the SaaS development tool - either a third party application (with it’s own UI) can access our RESTful API Library, or you can write extensions that integrate within the SaaS development tool web experience which can add new build tasks, dashboard widgets, and more. Extensions are the second approach.
+
+Extension:: Extensions contain a number of browser based add-ons that can be used to customize and extend the SaaS development tool. We call these _UI Components_. They are written with standard technologies - HTML, Angular2+TypeScript, SASS/CSS - and can be developed using your preferred dev tools. They utilize our RESTful API Library in order to easily interact with the Work Item Tracker and other applications/services. 
+
+NOTE: Initially  UI Components must be included in the fabric8io/fabric8-ui github project. There is no “store” and there is no ability to add or remove extensions on the fly, without redeploying the UI. In other words for the Summit release, the UI must be dynamic, not fully extensible.
+
+An extension is client side code, and so executes in the user’s browser, with the security context of the user
+
+An extension consists of:
+
+* A manifest file contains basic info about the extension.
+* Static files that contain the logic of your extension, including HTML, Angular2+TypeScript, and SASS/CSS files.
+* There are numerous places where you can add elements to the UI:
+** New tab
+** ...
+
+The extension model will be built incrementally, and longer term will include:
+
+* Assets which allow it to described in a store (e.g. image, markdown text)
+* A store or marketplace for extensions
+
+
+Longer term, extension bundles will also be supported, which will include:
+
+* None, one or more extensions that execute in the browser
+* None, one or more third party services 
+* None, one or more Work Item Tracking Primitives (e.g. Work Item Type definitions, Process Templates definitions) that will be loaded in to the work item tracker in the user or organisations context
+* Documentation associated with the extension bundle, including, but not limited to API docs, user docs, videos
+
+[%hardbreaks]
+
+Identity:: TODO
+Iteration:: In agile process terms, this represents one of many delivery cycles that software goes through to meet a specification
+Iteration (work item):: Per-team project, user defined paths used to group work into sprints, milestones or other event-specific or time-related periods. Newly created team projects have an initial set of iterations defined by the process template used to create the team project; the user can delete or modify these if desired. See also area (work item)
+KPI:: An aggregated set of metrics that is used to derive or deduce an indication of success or failure based on the value of the aggregation
+Microservice:: An architectural style of modularizing software with an emphasis on atomic deployment as the driver governing the size of the module. Communication between modules is typically done via a REST API using Http.
+Pipeline:: A metaphor or piece of software in which execution is performed in several sequential stages, each stage consisting of one or more steps.
+Planner:: A browser based planning system written in Angular 2 + TypeScript that enables teams creating software to plan out their work (create rich hierarchies of work items, create and plan iterations etc.). Uses the RESTful APIs from the Work Item Tracker to persist data. 
+Process Template:: An encoding of a development methodology (e.g. Scrum, CMMI, etc.) which is used to initially populate a newly created Team Project with elements relevant to that methodology. These elements may include, but are not limited to: a set of Work Item Type definitions; a default set of Iterations; work item queries; reports; pipeline definitions/templates;  security groups.
+Project, Team:: 
+* [Note that we have not yet determined exactly what to call a ‘project’ in the context of this system. ‘Foo Project’ (with Foo replaced with the product name), Team Project, etc. are all possibilities. For now, let’s use Team Project.]
+* A container for related data within a defined scope. It is up to the create of the project to define the scope. The scope can be very small (“this Team Project is used to manage the development of HelloWorld”) or very large (“this Team project is used to manage the development of all of Apache OpenOffice”). A Team Project has a name and a description. It may contain work item definitions and work items. It may contain Codebases. It may contain Workspaces. It may contain Pipeline Definitions. It may contain Teams. It contains at least one Area (“/” by default) and one Iteration. A Team Project is created from a Process Template, which seeds the Team Project with an initial set of Work Item Types and various other artifacts (e.g. an initial set of Iterations). Team Projects are either Public or Private. [Public projects permit anonymous viewing of all project content, although creation of content in the project may be controlled/limited by project administrators. Private projects permit essentially any access model.]
+* Another way to think of a Team Project is to consider a ‘nested dolls’ view of Pizza the Hutt. The top-most container is Pizza the Hutt (the overall SaaS). Within Pizza the Hutt are (1) Users, (2) Organizations and (3) Process Templates. Both Users and Organizations may contain Team Projects. Essentially everything else in the SaaS is contained within a Team Project. So a Team Project is a container for everything in Pizza the Hutt, except for Users, Organizations and Process Templates.
+RESTful API Library:: 
+The SaAS product offers three levels of API, stable, semi-stable and unstable.
+* Stable APIs:
+** Have a consistent design as specified by the API design guide
+** Are accessed using OAuth
+** Fully conform to REST principles
+** Use a JSON payload
+** Fully backwards compatible - a new version must be introduced to change (in any way that break the users) the API
+*** Old API versions continue to work forever (backwards compatibility)
+*** In essence new, optional, parameters or new verbs may be added to existing resources without incrementing the API version.
+** Fully documented (for example, the WIT API)
+* Semi-stable APIs
+** Often the underlying component API (e.g. Jenkins) is exposed
+** Often don’t follow our design guide
+** Often don’t conform to REST or use JSON
+** Some warning or deprecation is provided before change (policy TBC)
+* Unstable APIs:
+** Often the underlying component API (e.g. Jenkins) is exposed
+** Often don’t follow our design guide
+** Often don’t conform to REST or use JSON
+** Are subject to change without warning
+* Both types of API are used by the SaaS UI, and both can be used by users. Unstable APIs are clearly marked as such so that users have the correct expectation.
+* Normally we start by introducing an unstable API to add functionality, and then create a stable API once the API is validated.
+Remote Work Item:: TODO
+Scenarios:: A specific defined interaction/sequence of interactions with a system to achieve a given goal
+Service:: A piece of software executing on a server
+* Exposing a REST APIs (which can share the executing users security context)
+Service, Hosted:: A service, which additionally is: 
+* Packaged as containers (defined using docker) either standalone or orchestrated using Kubernetes (definiton file formats such as OpenShift templates or compose files supported)
+Service, Hosted First Party:: A hosted service, which additionally is:
+* Running in a namespace owned by the system adminstrator
+* Has been vetted and validated by the system administrator
+* Examples: Che
+Service, Hosted Third Party:: A hosted service, which additonally is:
+* Executed within a namespace belonging to the user, in the security context of the user
+SaaS:: Software as a service
+Stack:: A set of technologies chosen to satisfy a particular software implementation
+Sprint:: In agile terms , a single iteration of delivery in which features are pulled from a backlog, estimated, implemented, tested, delivered according to some acceptance criteria.
+Team Project:: See Project, Team.
+Team stakeholder:: A party with influence who has a vested interest in the success of the project.
+Two pizza team:: A colloquial way to describe the size of a team based on how many people does it take to consume 2 pizzas. The assumption is that they are not too hungry and that the pizza is a large pizza.
+Tracker:: TODO
+Tracker Item:: TODO
+Tracker Query:: TODO
+UI:: The integrated, extensible User Interface
+User:: TODO
+User stories:: A way to describe a scenario such that it has clear acceptance criteria and that unambiguously describes a user interaction , or the interaction between two parts of a system. Team members tak a user story and decompose it into tasks that satisfy the user story. Usually some point value is assigned to a story that serves a way to measure the rate of completing user stories.
+Value proposition:: A proposed set of capabilities that is focused on delivering some specific value to the end user or customer
+Velocity:: The rate at which an individual/team/organization completes user stories. Typically measured in story points. Story points are assigned to each user story for each sprint based on a relative numerical value describing the relative amount of effort required to complete. The fibonacci series is often used for relative sizing of effort. 1,2,3,5,8,13,21 where 1 could represent is 1-2 hours effort and a 21 would represent an entire sprint duration (2 weeks..1month)
+Workflow:: The set of activities a developer must go through to complete a given task
+Work item:: A captured representation of some work that has to be done and an instance of a _Work Item Type_. It must have a type, and it must follow the rules defined by its type.
+
+[source,json]
+.Example Work Item
+----
+{
+    "type": "Task",
+    "name": "task1",
+    "fields": {
+        "system.owner": "dev_user",
+        "system.title": "Write API for user registration",
+        "system.duration":3
+    }
+}
+----
+
+This example work item has `type` of `Task` and to be valid must meet any rules defined by the `Task` Work Item Type.
+
+Work Item Tracking:: TODO
+Work Item Tracking Primitive Definitions:: The metadata that defines the data structures of the captured representations of work, and how it is executed in source format (not loaded in to the system)
+Work Item Tracking Primitives:: The metadata that defines the data structures of the captured representations of work, and how it is executed, loaded in the context of a user, organisation or system
+Work item tracker:: The piece of software written in Go that exposes a series of stable, semi-stable and unstable APIs that enable the management of both instances of and types of work items, including work item types, work item categories, areas, iterations and workflows. Other services may register to receive notifications of events by allowing third party services to register web hooks.
+Work Item Type (WIT):: A basic data structure that defines the valid structure and fields for a _Work Item_. Work item types support single inheritance; the "extendedTypeID" parameter specifies the ID of the parent work item type.
+
+[source,json]
+.Example Work Item Type
+----
+{
+   "name":"Task",
+   "fields":{
+      "system.owner":{
+         "required":true,
+         "kind":"user"
+      },
+      "system.title":{
+         "required":true,
+         "kind":"string"
+      },
+      "system.duration":{
+         "required":true,
+         "kind":"integer"
+      }
+   },
+ "extendedTypeID": null
+}
+----
+
+== General terminology
+
+API:: Application programming interface.
+API first:: A style of  contract first development in which an experience is constructed that defines and informs the API that the software  need to function. Only then is the API implemented. This approach yields API’s that are simpler and more suited to the task at hand. 
+Area (work item):: Per-team project, user defined paths used to group work items by team, product or feature areas. Newly created team projects contain a single, root area that matches the team project name; the user can modify it if desired. See also iteration (work item)
+Asciidoc:: A simplified form of markup suited to creating documents. Similar to markdown in concept.
+Concern:: In a software context , a concern refers to a capability, such as logging or security, that is used across several parts of a solution, and thus is shared but self contained at the same time.
+Fault tolerance:: The capability of software to continue to function in a presence of failure
+IDE:: Integrated Development Environment, often used to refer to tools like Eclipse, IntelliJ or Visual Studio
+Java EE:: Java Enterprise Edition
+Journey:: In the context of learning, a journey represents the path through a subject matter curriculum a person might follow
+JVM:: Java Virtual Machine
+LAMP:: Linux Apache MySQL PHP
+Markdown:: A simplified document markup style optimized for reading and document writing
+RHEL:: Red Hat Enterprise Linux
+RDBMS:: Relational Database Management System
+Scalability:: The ability of a software system to increase its capacity as demand grows, and this without changing the software.
+Services, First Party:: Backend services,
+Software-collections:: A name describing the set of  supported software repositories that people subscribe to
+Statelessness:: The trait of software architecture that allows the saving and retrieving state from different processes
+Upstream:: In open source , the upstream efforts refer to the collective efforts, repositories of the original authors of a open source software projects
+XAMP:: Cross platform Apache MySQL and PHP
