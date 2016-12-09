@@ -26,6 +26,7 @@ An extension consists of:
 * Static files that contain the logic of your extension, including HTML, Angular2+TypeScript, and SASS/CSS files.
 * There are numerous places where you can add elements to the UI:
 ** New tab
+** Menu item
 ** ...
 
 The extension model will be built incrementally, and longer term will include:
@@ -38,7 +39,7 @@ Longer term, extension bundles will also be supported, which will include:
 
 * None, one or more extensions that execute in the browser
 * None, one or more third party services 
-* None, one or more Work Item Tracking Primitives (e.g. Work Item Type definitions, Process Templates definitions) that will be loaded in to the work item tracker in the user or organisations context
+* None, one or more Work Item Tracking Primitives (e.g. Work Item Type definitions, Process Templates definitions) that will be loaded in to the work item tracker in the user or organizations context
 * Documentation associated with the extension bundle, including, but not limited to API docs, user docs, videos
 
 [%hardbreaks]
@@ -49,7 +50,7 @@ Iteration (work item):: Per-team project, user defined paths used to group work 
 KPI:: An aggregated set of metrics that is used to derive or deduce an indication of success or failure based on the value of the aggregation
 Microservice:: An architectural style of modularizing software with an emphasis on atomic deployment as the driver governing the size of the module. Communication between modules is typically done via a REST API using Http.
 Pipeline:: A metaphor or piece of software in which execution is performed in several sequential stages, each stage consisting of one or more steps.
-Planner:: A browser based planning system written in Angular 2 + TypeScript that enables teams creating software to plan out their work (create rich hierarchies of work items, create and plan iterations etc.). Uses the RESTful APIs from the Work Item Tracker to persist data. 
+Planner:: A browser based planning system written in Angular 2 + TypeScript that enables teams creating software to plan out their work (create rich hierarchies of work items, create and plan iterations etc.). Uses the RESTful APIs from the Work Item Tracker to persist data. This is an example of a extension bundle. 
 Process Template:: An encoding of a development methodology (e.g. Scrum, CMMI, etc.) which is used to initially populate a newly created Team Project with elements relevant to that methodology. These elements may include, but are not limited to: a set of Work Item Type definitions; a default set of Iterations; work item queries; reports; pipeline definitions/templates;  security groups.
 Project, Team:: 
 * [Note that we have not yet determined exactly what to call a ‘project’ in the context of this system. ‘Foo Project’ (with Foo replaced with the product name), Team Project, etc. are all possibilities. For now, let’s use Team Project.]
@@ -83,12 +84,13 @@ Scenarios:: A specific defined interaction/sequence of interactions with a syste
 Service:: A piece of software executing on a server
 * Exposing a REST APIs (which can share the executing users security context)
 Service, Hosted:: A service, which additionally is: 
-* Packaged as containers (defined using docker) either standalone or orchestrated using Kubernetes (definiton file formats such as OpenShift templates or compose files supported)
+* Packaged as containers (defined using docker) either standalone or orchestrated using Kubernetes (definition file formats such as OpenShift templates or compose files supported)
 Service, Hosted First Party:: A hosted service, which additionally is:
-* Running in a namespace owned by the system adminstrator
+* Running in a namespace owned by the system administrator
 * Has been vetted and validated by the system administrator
+* TODO: Expectations on authorization and authentication - registration/certification
 * Examples: Che
-Service, Hosted Third Party:: A hosted service, which additonally is:
+Service, Hosted Third Party:: A hosted service, which additionally is:
 * Executed within a namespace belonging to the user, in the security context of the user
 SaaS:: Software as a service
 Stack:: A set of technologies chosen to satisfy a particular software implementation
