@@ -3,6 +3,9 @@
 # Show command before executing
 set -x
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 # We need to disable selinux for now, XXX
 /usr/sbin/setenforce 0
 
