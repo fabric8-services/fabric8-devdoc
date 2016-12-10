@@ -23,7 +23,7 @@ rm -rf _site
 docker build -t almighty-devdoc-builder -f Dockerfile .
 
 # Build site
-docker run --detach=true --name=almighty-devdoc-builder -t -v $(pwd):/almighty-devdoc:Z almighty-devdoc-builder "jekyll build"
+docker run --name=almighty-devdoc-builder -t -v $(pwd):/almighty-devdoc:Z almighty-devdoc-builder "jekyll build"
 
 # TODO: Test ?
 
