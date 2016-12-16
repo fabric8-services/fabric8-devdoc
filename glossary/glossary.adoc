@@ -9,6 +9,25 @@ Blue/Green deployment strategy:: In this deployment strategy two target environm
 Continuous value delivery:: Refers to the idea of delivering working software features at the end of each sprint in a scrum agile process
 Continuous deployment:: Refers to the process of automatically deploying software changes in a system as they occur instead of larger release cycles.
 Canary deployment strategy:: In this deployment strategy , some fraction of the deployment environment is updated with a new change. If all goes well, then the rest of the environment is updated. This allows for testing of experimental features in a production environment.
+Collaboration Space:: A container for related data within a defined scope. It is up to the creator of the collaboration space to define the scope. The scope can be very small ("this Collaboration Space is used to manage the development of HelloWorld") or very large ("this Collaboration Space is used to manage the development of all of Apache OpenOffice"). A Collaboration Space has a name and a description and may contain:
++
+* work item definitions 
+* work items
+* Codebases
+* Workspaces
+* Pipeline Definitions
+* Teams.
++
+By default it contains:
++
+* one Area ("/" by default)
+* one Iteration. 
++
+A Collaboration Space is created from a Process Template, which seeds the Collaboration Space with an initial set of Work Item Types and various other artifacts (e.g. an initial set of Iterations). Collaboration Spaces are either Public or Private. [Public collaboriation spaces permit anonymous viewing of all content within the collaboration space, although creation of content in the collaboration space may be controlled/limited by collaboration space administrators. Private collaboration spaces permit essentially any access model.]
++
+Another way to think of a Collaboration Space is to consider a 'nested dolls' view of Pizza the Hutt. The top-most container is Pizza the Hutt (the overall SaaS). Within Pizza the Hutt are (1) Users, (2) Organizations and (3) Process Templates. Both Users and Organizations may contain Collaboration Spaces. Essentially everything else in the SaaS is contained within a Collaboration Space. So the Pizza the Hutt Collaboration Space is a container for everything in Pizza the Hutt, except for Users, Organizations and Process Templates.
++
+Collaboration Spaces are sometimes simply refered to as spaces. E.g. "the HelloWorld collaboration space" and "the HelloWorld space" refer to the same thing.
 Dashboard:: A user interface concept in which a person can view a collections of important aspects of a system on a single page in near real time, just as you would in a car dashboard.
 DevOps:: A word used to describe the combination of  development and operations responsibilities into a single responsibility performed by a cross functional team.
 Experience:: The user centric usage experience that the user has while interacting with the system
@@ -16,7 +35,7 @@ Extensibility model:: There are two ways to extend the SaaS development tool - e
 
 Extension:: Extensions contain a number of browser based add-ons that can be used to customize and extend the SaaS development tool. We call these _UI Components_. They are written with standard technologies - HTML, Angular2+TypeScript, SASS/CSS - and can be developed using your preferred dev tools. They utilize our RESTful API Library in order to easily interact with the Work Item Tracker and other applications/services. 
 
-NOTE: Initially  UI Components must be included in the fabric8io/fabric8-ui github project. There is no “store” and there is no ability to add or remove extensions on the fly, without redeploying the UI. In other words for the Summit release, the UI must be dynamic, not fully extensible.
+NOTE: Initially  UI Components must be included in the fabric8io/fabric8-ui github project. There is no "store" and there is no ability to add or remove extensions on the fly, without redeploying the UI. In other words for the Summit release, the UI must be dynamic, not fully extensible.
 
 An extension is client side code, and so executes in the user’s browser, with the security context of the user
 
@@ -46,16 +65,12 @@ Longer term, extension bundles will also be supported, which will include:
 
 Identity:: TODO
 Iteration:: In agile process terms, this represents one of many delivery cycles that software goes through to meet a specification
-Iteration (work item):: Per-team project, user defined paths used to group work into sprints, milestones or other event-specific or time-related periods. Newly created team projects have an initial set of iterations defined by the process template used to create the team project; the user can delete or modify these if desired. See also area (work item)
+Iteration (work item):: Per-collaboration space, user defined paths used to group work into sprints, milestones or other event-specific or time-related periods. Newly created collaboration spaces have an initial set of iterations defined by the process template used to create the team collaboration space; the user can delete or modify these if desired. See also area (work item)
 KPI:: An aggregated set of metrics that is used to derive or deduce an indication of success or failure based on the value of the aggregation
 Microservice:: An architectural style of modularizing software with an emphasis on atomic deployment as the driver governing the size of the module. Communication between modules is typically done via a REST API using Http.
 Pipeline:: A metaphor or piece of software in which execution is performed in several sequential stages, each stage consisting of one or more steps.
 Planner:: A browser based planning system written in Angular 2 + TypeScript that enables teams creating software to plan out their work (create rich hierarchies of work items, create and plan iterations etc.). Uses the RESTful APIs from the Work Item Tracker to persist data. This is an example of a extension bundle. 
-Process Template:: An encoding of a development methodology (e.g. Scrum, CMMI, etc.) which is used to initially populate a newly created Team Project with elements relevant to that methodology. These elements may include, but are not limited to: a set of Work Item Type definitions; a default set of Iterations; work item queries; reports; pipeline definitions/templates;  security groups.
-Project, Team:: 
-* [Note that we have not yet determined exactly what to call a ‘project’ in the context of this system. ‘Foo Project’ (with Foo replaced with the product name), Team Project, etc. are all possibilities. For now, let’s use Team Project.]
-* A container for related data within a defined scope. It is up to the create of the project to define the scope. The scope can be very small (“this Team Project is used to manage the development of HelloWorld”) or very large (“this Team project is used to manage the development of all of Apache OpenOffice”). A Team Project has a name and a description. It may contain work item definitions and work items. It may contain Codebases. It may contain Workspaces. It may contain Pipeline Definitions. It may contain Teams. It contains at least one Area (“/” by default) and one Iteration. A Team Project is created from a Process Template, which seeds the Team Project with an initial set of Work Item Types and various other artifacts (e.g. an initial set of Iterations). Team Projects are either Public or Private. [Public projects permit anonymous viewing of all project content, although creation of content in the project may be controlled/limited by project administrators. Private projects permit essentially any access model.]
-* Another way to think of a Team Project is to consider a ‘nested dolls’ view of Pizza the Hutt. The top-most container is Pizza the Hutt (the overall SaaS). Within Pizza the Hutt are (1) Users, (2) Organizations and (3) Process Templates. Both Users and Organizations may contain Team Projects. Essentially everything else in the SaaS is contained within a Team Project. So a Team Project is a container for everything in Pizza the Hutt, except for Users, Organizations and Process Templates.
+Process Template:: An encoding of a development methodology (e.g. Scrum, CMMI, etc.) which is used to initially populate a newly created Collaboration Space with elements relevant to that methodology. These elements may include, but are not limited to: a set of Work Item Type definitions; a default set of Iterations; work item queries; reports; pipeline definitions/templates;  security groups.
 RESTful API Library:: 
 The SaAS product offers three levels of API, stable, semi-stable and unstable.
 * Stable APIs:
@@ -93,9 +108,9 @@ Service, Hosted First Party:: A hosted service, which additionally is:
 Service, Hosted Third Party:: A hosted service, which additionally is:
 * Executed within a namespace belonging to the user, in the security context of the user
 SaaS:: Software as a service
+Space:: See Collaboration Space
 Stack:: A set of technologies chosen to satisfy a particular software implementation
 Sprint:: In agile terms , a single iteration of delivery in which features are pulled from a backlog, estimated, implemented, tested, delivered according to some acceptance criteria.
-Team Project:: See Project, Team.
 Team stakeholder:: A party with influence who has a vested interest in the success of the project.
 Two pizza team:: A colloquial way to describe the size of a team based on how many people does it take to consume 2 pizzas. The assumption is that they are not too hungry and that the pizza is a large pizza.
 Tracker:: TODO
@@ -158,7 +173,7 @@ Work Item Type (WIT):: A basic data structure that defines the valid structure a
 
 API:: Application programming interface.
 API first:: A style of  contract first development in which an experience is constructed that defines and informs the API that the software  need to function. Only then is the API implemented. This approach yields API’s that are simpler and more suited to the task at hand. 
-Area (work item):: Per-team project, user defined paths used to group work items by team, product or feature areas. Newly created team projects contain a single, root area that matches the team project name; the user can modify it if desired. See also iteration (work item)
+Area (work item):: Per-collaboration space, user defined paths used to group work items by team, product or feature areas. Newly created colaboration spaces contain a single, root area that matches the collaboration space name; the user can modify it if desired. See also iteration (work item)
 Asciidoc:: A simplified form of markup suited to creating documents. Similar to markdown in concept.
 Concern:: In a software context , a concern refers to a capability, such as logging or security, that is used across several parts of a solution, and thus is shared but self contained at the same time.
 Fault tolerance:: The capability of software to continue to function in a presence of failure
