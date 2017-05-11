@@ -46,7 +46,6 @@ https://github.com/Ritsyy[Richa Rupela], Dev intern, Backend, 100%, IST
 Sarajane Clark (Sj), User Research + UX, , 20%, EST
 https://github.com/sanbornsen[Sudipta Sen], Dev, UI, 100%, IST
 https://github.com/sbose78[Shoubhik Bose], Dev, Backend, 100%, IST
-https://github.com/tsmaeder[Thomas Maeder], Dev, Backend, 100%, CET
 https://github.com/xcoulon[Xavier Coulon], Dev, Backend, 100%, CET
 |===
 
