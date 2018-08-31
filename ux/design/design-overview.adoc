@@ -1,5 +1,0 @@
-= Visuals & Workflows
-
-- link:visuals/visuals.html[visuals]
-- link:workflows/workflows.html[workflows]
-- link:wireframes/wireframes.html[wireframes]

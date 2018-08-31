@@ -1,6 +1,0 @@
-= Build Authentication Flow 
-
-:imagesdir: images/
-
-image::build_auth_flow.svg["Build Authentication Flow"]
-
