@@ -1,9 +1,0 @@
-= UX Overview
-
-== Owner Flow
-
-This describes the workflow of the project or product manager in ALM.
-
-image:Owner_Flow.png[Image]
-
-To see full scale click this link:Owner_Flow.png[Image].

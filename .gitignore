@@ -1,11 +1,7 @@
 *~
-/_site/
-/.bundle/
-/tmp/
 *.bundle
 *.cache
 *.swp
 .project
 .idea
 .DS_Store
-jenkins-env
