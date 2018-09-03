@@ -1,2 +1,6 @@
 = OpenShift.io Developer Documentation
 
+This document content information for OpenShift.io developers.  It contains designs, diagrams, docs, setup (and more) for different services and interaction between them.
+
+Any OpenShift.io developer is welcomed to enhance this documentation.
+ 
