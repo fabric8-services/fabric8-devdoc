@@ -1,14 +1,13 @@
 sudo: required
 
 services:
-  - docker                  
+  - docker
 
-before_install:            
-  - mkdir -p output
-  - docker pull asciidoctor/docker-asciidoctor
+before_install:
+  - TRAVIS_ENABLED=true
 
 script:
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output *.adoc      
+  - sh generate.sh
 
 after_error: 
   - docker logs asciidoc-to-html
@@ -17,7 +16,7 @@ after_failure:
   - docker logs asciidoc-to-html
 
 after_success:      
-  - cd output ; mv README.html index.html ; cp -R ../images images
+  - cd output/docs
   - git init
   - git config user.name "${GH_USER}"
   - git config user.email "${GH_EMAIL}"

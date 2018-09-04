@@ -1,0 +1,31 @@
+== Instructions
+
+First, run ./gerate.sh file
+
+
+```
+[user@localhost fabric8-devdoc]$ tree
+.
+├── CNAME
+├── docs
+│   ├── blueprint
+│   │   └── proxy.adoc
+│   ├── designs
+│   │   ├── flow.adoc
+│   │   └── images
+│   │       └── logo.png
+│   └── index.adoc
+├── generate.sh
+├── output
+│   └── docs
+│       ├── blueprint
+│       │   └── proxy.html
+│       ├── designs
+│       │   ├── flow.html
+│       │   └── images
+│       │       └── logo.png
+│       └── index.html
+└── README.adoc
+
+9 directories, 11 files
+```
