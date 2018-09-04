@@ -16,7 +16,7 @@ after_failure:
 
 after_success:      
   - cd output/docs
-  - git init
+  - sudo git init
   - git config user.name "${GH_USER}"
   - git config user.email "${GH_EMAIL}"
   - git add . ; git commit -m "Deploy to GitHub Pages"
