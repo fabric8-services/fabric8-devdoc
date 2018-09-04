@@ -17,7 +17,7 @@ after_failure:
 after_success:      
   - cd output/docs
   - sudo git init
-  - git config user.name "${GH_USER}"
-  - git config user.email "${GH_EMAIL}"
-  - git add . ; git commit -m "Deploy to GitHub Pages"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/fabric8-services/fabric8-devdoc" master:gh-pages > /dev/null 2>&1
+  - sudo git config user.name "${GH_USER}"
+  - sudo git config user.email "${GH_EMAIL}"
+  - sudo git add . ; git commit -m "Deploy to GitHub Pages"
+  - sudo git push --force --quiet "https://${GH_TOKEN}@github.com/fabric8-services/fabric8-devdoc" master:gh-pages > /dev/null 2>&1
