@@ -19,5 +19,6 @@ after_success:
   - sudo git init
   - sudo git config user.name "${GH_USER}"
   - sudo git config user.email "${GH_EMAIL}"
-  - sudo git add . ; git commit -m "Deploy to GitHub Pages"
+  - sudo git add .
+  - sudo git commit -m "Deploy to GitHub Pages"
   - sudo git push --force --quiet "https://${GH_TOKEN}@github.com/fabric8-services/fabric8-devdoc" master:gh-pages > /dev/null 2>&1
