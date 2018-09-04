@@ -6,26 +6,15 @@ function run() {
         WORK_DIR=$TRAVIS_BUILD_DIR
     fi
 
-    setup;
     init;
     generateAll;
     copyAll;
 }
 
-function setup() {
+function init() {
     set -x
     set -e
 
-    if [ "$TRAVIS_ENABLED" != true ]; then
-    yum -y install \
-        docker \
-        git
-
-    service docker start
-    fi
-}
-
-function init() {
     rm -rf output
     mkdir -p output
 
