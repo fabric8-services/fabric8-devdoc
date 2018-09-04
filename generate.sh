@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function run() {
     WORK_DIR=$PWD
     if [ "$TRAVIS_ENABLED" = true ]; then

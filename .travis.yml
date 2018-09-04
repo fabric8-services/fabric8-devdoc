@@ -6,8 +6,7 @@ services:
 before_install:
   - TRAVIS_ENABLED=true
 
-script:
-  - sh generate.sh
+script: bash generate.sh
 
 after_error: 
   - docker logs asciidoc-to-html
