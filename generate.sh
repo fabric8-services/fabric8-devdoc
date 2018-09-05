@@ -9,6 +9,7 @@ function run() {
     init;
     generateAll;
     copyAll;
+    renameLinks;
 }
 
 function init() {
@@ -47,6 +48,10 @@ function copyAll() {
             cp $file output/$dir
         done
     done
+}
+
+function renameLinks() {
+    sed -i 's/.[aA][dD][oO][cC]/.html/g' output/docs/index.html
 }
 
 run;

@@ -4,3 +4,9 @@ This document content information for OpenShift.io developers.  It contains desi
 
 Any OpenShift.io developer is welcomed to enhance this documentation.
  
+== Index
+
+=== Designs
+
+. link:mulit-env/multi_env.adoc[Multi Environment]
+
