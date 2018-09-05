@@ -42,10 +42,10 @@ function generateDocs() {
 function copyAll() {
     for dir in `find docs -type d`
     do
-        mkdir -p output/$dir
+        sudo mkdir -p output/$dir
         for file in `find $dir -maxdepth 1 -type f ! -name "*.adoc"`
         do
-            cp $file output/$dir
+            sudo cp $file output/$dir
         done
     done
 }
