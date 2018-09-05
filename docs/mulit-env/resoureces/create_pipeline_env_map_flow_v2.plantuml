@@ -1,0 +1,28 @@
+@startuml
+actor client
+
+participant "Space settings/UI" as ui
+participant "Build Service" as bs
+participant "Environment Service" as es
+participant "Auth Service" as auth
+
+title Create Pipleline Environment Map Flow v2
+
+client->ui:View
+ui->bs:GET /pipleline-env-maps spaceID=123
+bs->auth:Space admin?
+bs<--auth
+ui<--bs:Pipeline env maps for the space
+...
+client->ui:Create Pipeline Env Map
+ui->es:GET /envs spaceID=123
+es->auth:Space admin?
+es<--auth
+ui<--es:[]env available for space
+client<--ui:Pick env for each stage
+client-->ui
+ui->bs:POST /pipeline-env-map spaceID=123\ncreates pipeline env map:\n{name:"xyz",\nstage:env1,\nprod:env2,...}
+bs->auth:Space admin?
+bs<--auth
+ui<--bs:OK
+@enduml

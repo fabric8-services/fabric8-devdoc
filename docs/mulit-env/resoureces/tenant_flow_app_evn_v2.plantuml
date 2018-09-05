@@ -1,0 +1,79 @@
+@startuml
+title Tenant Flow for App environment - V2
+
+actor client
+
+participant "Tenant Service" as ts
+participant "Auth Service" as as
+participant "Env Service" as es
+participant "Cluster Service" as cs
+participant "OSD" as osd
+
+== With specified environment ==
+client->ts:GET/POST ns-type=run&env=dsaas-production&w=true&space=123
+
+ts->as:Get user info for token
+ts<--as:User[id,clusterURL,...]
+
+ts->as:GET /isCollaborator user=id&space=123
+ts<--as:true
+
+ts->es:GET /env ns-type=run&env=dsaas-produciton&space=123
+ts<--es: ns-type(template),[]env(name,ns-name,cluster_url,profile(name,limits,..))
+
+ts->cs:GET /cluster by url (for the dsaas-production env)
+ts<--cs:Cluster
+
+ts->osd:Provision (dsaas-production namespace)
+ts<--osd
+client<--ts
+
+== Without specified environment ==
+
+client->ts:GET/POST ns-type=run&w=true&space=123
+
+ts->as:Get user info for token
+ts<--as:User[id,clusterURL,...]
+
+ts->as:GET /isCollaborator user=id&space=123
+ts<--as:true
+
+ts->es:GET /env ns-type=run&space=123
+ts<--es: ns-type(template),[]env(name,ns-name,cluster_url,profile(name,limits,..))
+
+loop all envs of type run
+    ts->cs:GET /cluster by url (for the env)
+    ts<--cs:Cluster
+
+    ts->osd:Provision (dsaas-production namespace)
+end
+ts<--osd
+client<--ts
+
+== Without specified environment nor type ==
+
+client->ts:GET/POST w=true&space=123
+
+ts->as:Get user info for token
+ts<--as:User[id,clusterURL,...]
+
+ts->as:GET /isCollaborator user=id&space=123
+ts<--as:true
+
+ts->es:GET /types space=123
+ts<--es: []ns-type
+
+loop all ns-types
+    ts->es:GET /env ns-type=type&space=123
+    ts<--es: ns-type(template)[]env(name,ns-name,cluster_url,profile(name,limits,..))
+
+    loop all envs of the type
+        ts->cs:GET /cluster by url (for the env)
+        ts<--cs:Cluster
+
+        ts->osd:Provision (dsaas-production namespace)
+    end
+end
+ts<--osd
+client<--ts
+@enduml

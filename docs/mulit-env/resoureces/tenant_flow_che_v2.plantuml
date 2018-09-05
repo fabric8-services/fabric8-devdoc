@@ -1,0 +1,47 @@
+@startuml
+title Tenant Flow for Che - V2
+
+actor client
+
+participant "Tenant Service" as ts
+participant "Auth Service" as as
+participant "Env Service" as es
+participant "Cluster Service" as cs
+participant "OSD" as osd
+
+== User is collaborator ==
+client->ts:GET/POST ns-type=che&w=true&space=123
+
+ts->as:Get user info for token
+ts<--as:User[id,clusterURL,...]
+
+ts->as:GET /isCollaborator user=id&space=123
+ts<--as:true
+
+ts->es:GET /env ns-type=che&space=123
+ts<--es: ns-type(template),env(name,ns-name,cluster_url,profile(name,limits,..))
+
+ts->cs:GET /cluster by url (for the che env)
+ts<--cs:Cluster
+
+ts->osd:Provision (che-username namespace within space 123)
+ts<--osd
+client<--ts
+
+== Without specified space ==
+
+client->ts:GET/POST ns-type=che&w=true
+
+ts->as:Get user info for token
+ts<--as:User[id,clusterURL,...]
+
+ts->es:GET /env ns-type=che
+ts<--es: ns-type(template),env(name,ns-name,cluster_url,profile(name,limits,..)) (default values)
+
+ts->cs:GET /cluster by url (for the user)
+ts<--cs:Cluster
+
+ts->osd:Provision (che-username namespace)
+ts<--osd
+client<--ts
+@enduml

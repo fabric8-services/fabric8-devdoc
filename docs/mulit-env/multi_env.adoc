@@ -5,10 +5,101 @@
 :sectnumlevels: 4
 :toc-placement: preamble
 
+Design doc for Multi Enviroment.
+
 === Flows
 
 ==== Create Environment Flow V2
 image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_env_flow_v2.plantuml&fmt=svg[Create Environment Flow V2]
+link:resoureces/create_env_flow_v2.plantuml[plantuml]
+
+==== Create Pipeline Environment Map Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_pipeline_env_map_flow_v2.plantuml&fmt=svg[Create Pipeline Environment Map Flow V2]
+link:resoureces/create_pipeline_env_map_flow_v2.plantuml[plantuml]
+
+==== Create App Flow V1
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v1.plantuml&fmt=svg[Create App Flow V1]
+link:resoureces/create_app_flow_v1.plantuml[plantuml]
+
+==== Create App Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v2.plantuml&fmt=svg[Create App Flow V2]
+link:resoureces/create_app_flow_v2.plantuml[plantuml]
+
+==== Pipeline View Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/pipeline_view_flow_v2.plantuml&fmt=svg[Pipeline View Flow V2]
+link:resoureces/pipeline_view_flow_v2.plantuml[plantuml]
+
+==== Open Che Workspace Flow V1
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_che_ws_flow_v1.plantuml&fmt=svg[Open Che Workspace Flow V1]
+link:resoureces/open_che_ws_flow_v1.plantuml[plantuml]
+
+==== Open Che Workspace Scenarios Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_ws_che_scenarios_flow_v2.plantuml&fmt=svg[Open Che Workspace Scenarios Flow V2]
+link:resoureces/open_ws_che_scenarios_flow_v2.plantuml[plantuml]
+
+==== Tenant Flow for Che V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_che_v2.plantuml&fmt=svg[Tenant Flow for Che V2]
+link:resoureces/tenant_flow_che_v2.plantuml[plantuml]
+
+==== Tenant Flow App Environment V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_app_evn_v2.plantuml&fmt=svg[Tenant Flow App Environment V2]
+link:resoureces/tenant_flow_app_evn_v2.plantuml[plantuml]
 
 === Models
 
+==== Cluster (Cluster Service)
+```
+apiURL
+appDNS
+capacityExhausted
+consoleURL
+loggingURL
+metricsURL
+name
+devtools-sre token
+```
+
+==== User
+```
+[ ] Space (id) - WIT
+[ ] Cluster (apiURL) - Cluster Service
+...
+```
+
+==== Space
+```
+User - WIT
+[ ] environment
+[ ] pipeline-environment-map
+...
+```
+
+==== PipelineEnvironmentMap
+```
+ID
+name
+[stage_name] environment (where stage_name = “test|stage|run|...”. Stage names are used in Jenkins file in the app)
+```
+
+==== EnvironmentType
+```
+Name
+version
+template
+```
+
+==== Environment
+```
+name
+Environment-type
+namespaceName
+Cluster (apiURL)
+Profile (that will be used for the account of the space owner)
+ProfileContributor (that will be used for the contributor accounts)
+```
+
+Environment-type: Possible values: build(jenkins), dev(che), test, stage, run(prod?), custom. Only one build and dev env allowed per space. Multiple deployment (test,stg,prod,custom) envs allowed per space.
+
+namespaceName: Optional. If not specified then auto-created by Tenant Service. Namespace can be set for build and deploy (test,stage,run,custom) environments. It’s not set for dev (it’s always auto-generated because it’s user specific. Each user will have his own ns in dev env cluster for che ws) 
+
+ProfileContributor: if not set, then contributor is not allowed to create an instance of the namespace within the space/cluster. In this case the contributor will get access to the only namespace instance of that environment that is set for the space.

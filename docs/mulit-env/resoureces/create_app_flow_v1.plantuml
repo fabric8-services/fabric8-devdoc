@@ -1,0 +1,55 @@
+@startuml
+actor client
+
+participant "Create App Wizard/UI" as ui
+participant "Launcher" as ls
+participant "WIT" as wit
+participant "Tenant Service" as ts
+participant "Auth Service" as auth
+participant "GitHub" as gh
+participant "OSO-Proxy" as osp
+participant "OSD/OSO" as os
+
+title Create App Flow v1
+
+client->ui:Create
+ui->ls:POST /osio/launch\nmission=...&pipeline=...\n&appName=...&repo=...
+ls->wit:GET /user/service
+wit->ts:GET /tenant
+wit<--ts:tenant:[]namespace\nwhere namespace:{\n"name","clusterURLs","type":"jenkins|user|che|...",\n"state","version"}
+ls<--wit
+|||
+ls->auth:GET /token?for=github
+ls<--auth:GitHub token
+|||
+ls->osp:Create GitHub secret in "user" ns (username/token)
+osp->os
+osp<--os
+ls<--osp
+|||
+ls->gh:Create repository
+ls<--gh:Repository
+|||
+ls->osp:Create Build config in "user" ns
+osp->os
+osp<--os
+ls<--osp:Build Config
+|||
+ls->gh:Push to repository
+ls->gh:Register Jenkins webhook
+|||
+ls->osp:Create Jenkins Config Map in "user" ns
+osp->os
+osp<--os
+ls<--osp
+|||
+ls->osp:Trigger Build in "user" ns
+osp->os
+osp<--os
+ls<--osp
+|||
+ls->wit:Create codebase
+ls<--wit
+|||
+ui<--ls:Done
+@enduml
