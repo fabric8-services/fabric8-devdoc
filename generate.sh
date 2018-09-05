@@ -51,7 +51,8 @@ function copyAll() {
 }
 
 function renameLinks() {
-    sed -i 's/.[aA][dD][oO][cC]/.html/g' output/docs/index.html
+    docker run -v $WORK_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor sed -i 's/.[aA][dD][oO][cC]/.html/g' /documents/output/docs/index.html
+    docker rm asciidoc-to-html
 }
 
 run;
