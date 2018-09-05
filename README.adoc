@@ -1,6 +1,6 @@
 == Instructions
 
-First, run ./gerate.sh file
+First, run ./generate.sh file
 
 
 ```
