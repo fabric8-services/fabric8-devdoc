@@ -1,31 +1,94 @@
-== Instructions
+= OpenShift.io Developer Documentation Project
+:toc:
+:toclevels: 5
+:sectnums:
+:sectnumlevels: 4
+:toc-placement: preamble
 
-First, run ./generate.sh file
+OpenShift.io Developer Document web-site: http://devdoc.almighty.io
 
+Please create "Pull Request" (PR) to contribute to developer documentation.
+
+=== Overview
+
+This project has two aspect.  First, it holds "Developer Documentation".  Second, this developer documentation "Published to Web-site".  For first, changes to developer documentation is continuous process while for second, changes happens in-frequently.
+
+This document provides details for both kind of users.  One who "contributes to developer documentation" and other who "maintain this project to publish its contents to web-site".
+
+Note, all `.adoc` documents files will be converted to `.html` file when published to web-site.
+
+=== Contributing to Developer Documentation
+
+All devdocs must be added under `docs` directory or sub-directory under it.
+
+**docs directory layout:**
 
 ```
-[user@localhost fabric8-devdoc]$ tree
 .
-├── CNAME
-├── docs
-│   ├── blueprint
-│   │   └── proxy.adoc
-│   ├── designs
-│   │   ├── flow.adoc
-│   │   └── images
-│   │       └── logo.png
-│   └── index.adoc
-├── generate.sh
-├── output
-│   └── docs
-│       ├── blueprint
-│       │   └── proxy.html
-│       ├── designs
-│       │   ├── flow.html
-│       │   └── images
-│       │       └── logo.png
-│       └── index.html
-└── README.adoc
-
-9 directories, 11 files
+└── docs
+    ├── blueprints
+    │   ├── resources
+    │   │   └── tenant_arch.jpg
+    │   └── tenant.adoc
+    ├── designs
+    │   ├── auth_arch.adoc
+    │   ├── resources
+    │   │   ├── auth_login_seq_flow.plantuml
+    │   │   └── wit_system.jpg
+    │   └── wit_design.adoc
+    ├── index.adoc
+    └── multi-env
+        ├── multi_env.adoc
+        └── resources
+            └── flow1.plantuml
+            └── flow2.plantuml
+            └── flow3.plantuml
+            └── flow4.plantuml
 ```
+
+index.adoc - This contains toc/index for all documents.  One link for each .adoc file should appear here.
+
+blueprints, designs - Separate directory for each category.  All blueprints content should go under `/docs/blueprints` like-wise for designs.  New directory like `ui-mockups` or something can be added.  In index.adoc should have heading for each category and one link for each adoc.
+
+multi-env - Topic specific directory can be added when given topic going to have lots of contents and related resources.  In index.adoc this topic can still go under designs/blueprints or something depending on what suites.
+
+**index.adoc for above docs layout:**
+
+```
+Blueprints
+    1. Tenant
+
+Designs
+    1. Auth
+    2. WIT
+    3. Multi Environment
+```
+
+Note, here "Multi Environment" is under "Designs" category.
+
+=== Test your changes locally
+
+1. Make changes under `docs` directory.
+2. Run `./generate.sh` (or mostly with sudo -> `sudo ./generate.sh`) to generate html web-site.
+3. There will be `output` directory created under that whole html web-site will be placed.
+
+Note, hyperlink in `index.adoc` with `.adoc` file extension will be converted to `.html` file extension in `index.html`.
+
+=== Project structure
+
+**.travis.yml**
+
+This project uses `travis` for builds link:https://travis-ci.org/fabric8-services/fabric8-devdoc[link].  Travis build is trigger only when PR/commit merge to `master` branch.
+
+Travis Build Link: https://travis-ci.org/fabric8-services/fabric8-devdoc
+
+**generate.sh**
+
+The `docs` folder with `.adoc` files converted to html site with `.html` file under `output` directory with `generate.sh` script.  Both `docs` and `output` will have same folders and same files except `.adoc` files converted to `.html` file.  Also, hyperlinks in `index.html` will have links to `.html` files.
+
+**notes**
+
+- Travis is configured under, GitHub Project - "Settings -> Integrations & services".
+- Web-site domain is configured under, GitHub Project - "Settings -> GitHub Pages -> Custom domain".
+- GH_USER, GH_EMAIL, GH_TOKEN are configured under, Travis Project - "Settings -> Environment Variables"
+ 
