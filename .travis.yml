@@ -10,11 +10,8 @@ services:
 before_install:
   - TRAVIS_ENABLED=true
 
-script: |
-  if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    bash generate.sh
-  else; true
-  fi
+script:
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then bash generate.sh; else true; fi
 
 after_error:
   - docker logs asciidoc-to-html
@@ -22,14 +19,15 @@ after_error:
 after_failure:
   - docker logs asciidoc-to-html
 
-after_success: |
-  if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    cd output/docs
-    sudo git init
-    sudo git config user.name "${GH_USER}"
-    sudo git config user.email "${GH_EMAIL}"
-    sudo git add .
-    sudo git commit -m "Deploy to GitHub Pages"
-    sudo git push --force --quiet "https://${GH_TOKEN}@github.com/fabric8-services/fabric8-devdoc" master:gh-pages > /dev/null 2>&1
-  else; true
+after_success:
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+    cd output/docs;
+    sudo git init;
+    sudo git config user.name "${GH_USER}";
+    sudo git config user.email "${GH_EMAIL}";
+    sudo git add .;
+    sudo git commit -m "Deploy to GitHub Pages";
+    sudo git push --force --quiet "https://${GH_TOKEN}@github.com/fabric8-services/fabric8-devdoc" master:gh-pages > /dev/null 2>&1;
+  else
+    true;
   fi
