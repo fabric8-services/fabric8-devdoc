@@ -5,6 +5,8 @@
 :sectnumlevels: 4
 :toc-placement: preamble
 
+image:https://api.travis-ci.org/fabric8-services/fabric8-devdoc.svg?branch=master[Travis,link="https://api.travis-ci.org/fabric8-services/fabric8-devdoc.svg?branch=master"]
+
 OpenShift.io Developer Document web-site: http://devdoc.almighty.io
 
 Please create "Pull Request" (PR) to contribute to developer documentation.
