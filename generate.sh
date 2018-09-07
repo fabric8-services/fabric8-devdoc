@@ -25,13 +25,14 @@ function init() {
 function generateAll() {
     for dir in `find docs -type d`
     do
-        cnt=`find $dir -type f -maxdepth 1 -name \*.adoc | wc -l`
-        if [ ${cnt} -ne 0 ]; then
+        # generate if there is at least one .adoc file in given dir
+        if [ `find $dir -type f -maxdepth 1 -name \*.adoc | wc -l` -ne 0 ]; then
             generateDocs;
         fi
     done
 }
 
+# generate .html file from .adoc file in given dir using asciidoctor
 function generateDocs() {
     in=/documents/$dir/*.adoc
     out=/documents/output/$dir
@@ -39,6 +40,7 @@ function generateDocs() {
     docker rm asciidoc-to-html
 }
 
+# copy all files (other than .adoc file) from 'docs' dir to 'output'
 function copyAll() {
     for dir in `find docs -type d`
     do
@@ -50,6 +52,7 @@ function copyAll() {
     done
 }
 
+# rename .adoc link to .html in index.html file
 function renameLinks() {
     docker run -v $WORK_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor sed -i 's/.[aA][dD][oO][cC]/.html/g' /documents/output/docs/index.html
     docker rm asciidoc-to-html

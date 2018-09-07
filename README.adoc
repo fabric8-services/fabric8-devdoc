@@ -91,6 +91,5 @@ The `docs` folder with `.adoc` files converted to html site with `.html` file un
 **notes**
 
 - Travis is configured under, GitHub Project - "Settings -> Integrations & services".
-- Web-site domain is configured under, GitHub Project - "Settings -> GitHub Pages -> Custom domain".
-- GH_USER, GH_EMAIL, GH_TOKEN are configured under, Travis Project - "Settings -> Environment Variables"
- 
+- GH_USER=travis-ci.org, GH_EMAIL=almighty-public@redhat.com, GH_TOKEN are configured under, Travis Project - "Settings -> Environment Variables".
+- Web-site domain is link:devdoc.almighty.io[] configured by copying CNAME file from `master` branch to `gh-pages` branch. 
