@@ -48,11 +48,11 @@ All devdocs must be added under `docs` directory or sub-directory under it.
             └── flow4.plantuml
 ```
 
-index.adoc - This contains toc/index for all documents.  One link for each .adoc file should appear here.
+`index.adoc` - This contains toc/index for all documents.  One link for each .adoc file should appear here.
 
-blueprints, designs - Separate directory for each category.  All blueprints content should go under `/docs/blueprints` like-wise for designs.  New directory like `ui-mockups` or something can be added.  In index.adoc should have heading for each category and one link for each adoc.
+`blueprints`, `designs` - Separate directory for each category.  All blueprints content should go under `/docs/blueprints` like-wise for designs.  New directory like `ui-mockups` or something can be added.  In `index.adoc` should have heading for each category and one link for each adoc.
 
-multi-env - Topic specific directory can be added when given topic going to have lots of contents and related resources.  In index.adoc this topic can still go under designs/blueprints or something depending on what suites.
+`multi-env` - Topic specific directory can be added when given topic going to have lots of contents and related resources.  In `index.adoc` this topic can still go under designs/blueprints or something depending on what suits.
 
 **index.adoc for above docs layout:**
 
@@ -74,13 +74,13 @@ Note, here "Multi Environment" is under "Designs" category.
 2. Run `./generate.sh` (or mostly with sudo -> `sudo ./generate.sh`) to generate html web-site.
 3. There will be `output` directory created under that whole html web-site will be placed.
 
-Note, hyperlink in `index.adoc` with `.adoc` file extension will be converted to `.html` file extension in `index.html`.
+ Note, hyperlink in `index.adoc` with `.adoc` file extension will be converted to `.html` file extension in `index.html`.
 
 === Project structure
 
 **.travis.yml**
 
-This project uses `travis` for builds link:https://travis-ci.org/fabric8-services/fabric8-devdoc[link].  Travis build is trigger only when PR/commit merge to `master` branch.
+This project uses `travis` for builds link:https://travis-ci.org/fabric8-services/fabric8-devdoc[link].  Travis build is triggered only when PR/commit are merged to `master` branch.
 
 Travis Build Link: https://travis-ci.org/fabric8-services/fabric8-devdoc
 
@@ -92,4 +92,4 @@ The `docs` folder with `.adoc` files converted to html site with `.html` file un
 
 - Travis is configured under, GitHub Project - "Settings -> Integrations & services".
 - GH_USER=travis-ci.org, GH_EMAIL=almighty-public@redhat.com, GH_TOKEN are configured under, Travis Project - "Settings -> Environment Variables".
-- Web-site domain is link:devdoc.almighty.io[] configured by copying CNAME file from `master` branch to `gh-pages` branch. 
+- Web-site domain link:http://devdoc.almighty.io[devdoc.almighty.io] is configured by copying CNAME file from `master` branch to `gh-pages` branch.
