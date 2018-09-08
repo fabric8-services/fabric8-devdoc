@@ -7,43 +7,12 @@
 
 Design doc for Multi Enviroment.
 
-=== Flows
+This doc is to cover:
 
-==== Create Environment Flow V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_env_flow_v2.plantuml&fmt=svg[Create Environment Flow V2]
-link:resoureces/create_env_flow_v2.plantuml[plantuml]
+- The current flows (v1) and OSIO service interactions with tenant clusters.
+- What needed to be done (flows v2) to support OSD clusters in OSIO. Supporting OSD clusters will also require supporting multiple clusters/environments per user.
 
-==== Create Pipeline Environment Map Flow V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_pipeline_env_map_flow_v2.plantuml&fmt=svg[Create Pipeline Environment Map Flow V2]
-link:resoureces/create_pipeline_env_map_flow_v2.plantuml[plantuml]
-
-==== Create App Flow V1
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v1.plantuml&fmt=svg[Create App Flow V1]
-link:resoureces/create_app_flow_v1.plantuml[plantuml]
-
-==== Create App Flow V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v2.plantuml&fmt=svg[Create App Flow V2]
-link:resoureces/create_app_flow_v2.plantuml[plantuml]
-
-==== Pipeline View Flow V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/pipeline_view_flow_v2.plantuml&fmt=svg[Pipeline View Flow V2]
-link:resoureces/pipeline_view_flow_v2.plantuml[plantuml]
-
-==== Open Che Workspace Flow V1
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_che_ws_flow_v1.plantuml&fmt=svg[Open Che Workspace Flow V1]
-link:resoureces/open_che_ws_flow_v1.plantuml[plantuml]
-
-==== Open Che Workspace Scenarios Flow V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_ws_che_scenarios_flow_v2.plantuml&fmt=svg[Open Che Workspace Scenarios Flow V2]
-link:resoureces/open_ws_che_scenarios_flow_v2.plantuml[plantuml]
-
-==== Tenant Flow for Che V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_che_v2.plantuml&fmt=svg[Tenant Flow for Che V2]
-link:resoureces/tenant_flow_che_v2.plantuml[plantuml]
-
-==== Tenant Flow App Environment V2
-image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_app_evn_v2.plantuml&fmt=svg[Tenant Flow App Environment V2]
-link:resoureces/tenant_flow_app_evn_v2.plantuml[plantuml]
+It doesn’t cover all our plans to improve the existing Getting Started, Build and ather services. It includes only bare minimum changes relevant to multi env support.
 
 === Models
 
@@ -74,21 +43,26 @@ User - WIT
 ...
 ```
 
-==== PipelineEnvironmentMap
+==== App (codebase?) - Build Service  
+```
+pipeline-environment-map
+```
+
+==== PipelineEnvironmentMap - Build Service
 ```
 ID
 name
 [stage_name] environment (where stage_name = “test|stage|run|...”. Stage names are used in Jenkins file in the app)
 ```
 
-==== EnvironmentType
+==== EnvironmentType - Environment Service
 ```
 Name
 version
 template
 ```
 
-==== Environment
+==== Environment - Environment Service
 ```
 name
 Environment-type
@@ -103,3 +77,41 @@ Environment-type: Possible values: build(jenkins), dev(che), test, stage, run(pr
 namespaceName: Optional. If not specified then auto-created by Tenant Service. Namespace can be set for build and deploy (test,stage,run,custom) environments. It’s not set for dev (it’s always auto-generated because it’s user specific. Each user will have his own ns in dev env cluster for che ws) 
 
 ProfileContributor: if not set, then contributor is not allowed to create an instance of the namespace within the space/cluster. In this case the contributor will get access to the only namespace instance of that environment that is set for the space.
+
+=== Flows
+
+==== Create Environment Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_env_flow_v2.plantuml&fmt=svg[Create Environment Flow V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/create_env_flow_v2.plantuml[Edit plantuml]
+
+==== Create Pipeline Environment Map Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_pipeline_env_map_flow_v2.plantuml&fmt=svg[Create Pipeline Environment Map Flow V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/create_pipeline_env_map_flow_v2.plantuml[Edit plantuml]
+
+==== Create App Flow V1
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v1.plantuml&fmt=svg[Create App Flow V1]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/create_app_flow_v1.plantuml[Edit plantuml]
+
+==== Create App Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/create_app_flow_v2.plantuml&fmt=svg[Create App Flow V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/create_app_flow_v2.plantuml[Edit plantuml]
+
+==== Pipeline View Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/pipeline_view_flow_v2.plantuml&fmt=svg[Pipeline View Flow V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/pipeline_view_flow_v2.plantuml[Edit plantuml]
+
+==== Open Che Workspace Flow V1
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_che_ws_flow_v1.plantuml&fmt=svg[Open Che Workspace Flow V1]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/open_che_ws_flow_v1.plantuml[Edit plantuml]
+
+==== Open Che Workspace Scenarios Flow V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/open_ws_che_scenarios_flow_v2.plantuml&fmt=svg[Open Che Workspace Scenarios Flow V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/open_ws_che_scenarios_flow_v2.plantuml[Edit plantuml]
+
+==== Tenant Flow for Che V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_che_v2.plantuml&fmt=svg[Tenant Flow for Che V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/tenant_flow_che_v2.plantuml[Edit plantuml]
+
+==== Tenant Flow App Environment V2
+image::http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.githubusercontent.com/fabric8-services/fabric8-devdoc/master/docs/mulit-env/resoureces/tenant_flow_app_evn_v2.plantuml&fmt=svg[Tenant Flow App Environment V2]
+link:https://github.com/fabric8-services/fabric8-devdoc/edit/master/docs/mulit-env/resoureces/tenant_flow_app_evn_v2.plantuml[Edit plantuml]
