@@ -1,0 +1,50 @@
+@startuml
+actor client
+
+participant "Create App Wizard/UI" as ui
+participant "Launcher" as ls
+participant "Build Service" as bs
+participant "Auth Service" as auth
+participant "WIT" as wit
+participant "OSO-proxy" as osp
+participant "GitHub" as gh
+participant "Tenant Service" as ts
+participant "Cluster Service" as cs
+participant "OSD/OSO" as os
+
+title Create App Flow v2
+
+client->ui:Create
+ui->bs:GET /pipleline-env-maps spaceID=123
+bs->auth:Space admin?
+bs<--auth
+ui<--bs:Pipeline env maps for the space\n[{id=123,stage=env1,run=env2},...]\n
+client<--ui:What pipeline\nenv map?
+client->ui:pipeline XYZ
+ui->auth:/token?for={cluster_from_build_env}
+ui<--auth:OS token or 401 if account is not linked
+client<--ui:if not linked\nask to link cluster
+ui->auth:Link GitHub account if needed
+ui->ls:POST /launch\n(spaceID, pipelineEnvMapID,\nappName, GH repo, etc)
+ls->auth:Space admin?
+ls<--auth
+ls->gh:Create repo
+ls<--gh
+ls->osp:Create Secrets /../ns:type=user;w=true;space=123 \n(github username/token)
+osp->ts:GET /tenants\nw=true&type=user&space=x
+ts->ts:init needed?
+osp<--ts:namespace (ns name,cluster)
+ts->cs:GET cluster?apiURL=x
+ts<--cs:cluster meta-data
+ts->os:create/provision ns if doesn't exist
+osp<--ts:namespace (ns name,cluster)
+osp->os:proxy
+osp<--os
+ls<--osp
+ls->osp:Create Build Config /../ns:type=user;w=true;space=x
+ls->osp:Create Jenkins Config Map /../ns:type=user;w=true;space=x
+ls->gh:Register webhook
+ls->osp:Trigger build /../ns:type=user;w=true;space=x
+ls->wit:Create codebase
+client<--ls:Done
+@enduml

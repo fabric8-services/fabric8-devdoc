@@ -1,0 +1,38 @@
+@startuml
+title Open Che Workspace Scenarios Flow - V2
+
+entity "User\njohn" as user
+
+participant "Che Server" as chesrv
+participant "OSO Proxy" as proxy
+participant "Tenant Service" as tenant
+
+note over user
+--**setup**--
+"john" is user with "juke-space"
+"alice" is user with "alex-space"
+"kai" is user with "kite-space"
+"john" is collabrator in "alex-space"
+end note
+
+== first - open_ws own by user ==
+user -> chesrv
+chesrv -> proxy : /../ns;type=che;w=true/..
+proxy -> tenant : /tenants?type=che&w=true
+proxy <-- tenant : namespace{john-che, cluster1.com}
+|||
+
+== second - open_ws where user is collaborator ==
+user -> chesrv
+chesrv -> proxy : /../ns;type=che;space=alex-space;w=true/..
+proxy -> tenant : /tenants?type=che&space=alex-space&w=true
+proxy <-- tenant : namespace{alice-che, cluster1.com}
+|||
+
+== third - open_ws where user is NOT collaborator ==
+user -> chesrv
+chesrv -> proxy : /../ns;type=che;space=kite-space;w=true/..
+proxy -> tenant : /tenants?type=che&space=kite-space&w=true
+proxy <-- tenant : namespace{john-che, cluster1.com}
+|||
+@enduml

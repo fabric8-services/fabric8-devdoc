@@ -1,0 +1,46 @@
+
+@startuml
+
+title Open Che Workspace Flow - V1
+
+entity OSIO as osio
+entity "Che Browser" as cheb
+
+participant "WIT" as wit
+participant "Che Starter" as chestart
+participant "Che Server" as chesrv
+participant "OSO Proxy" as proxy
+participant "OpenShift" as os
+
+== create workspace by OSIO ==
+osio -> wit : POST /api/codebases/cb-1111/create
+wit -> chestart : POST /workspace?masterUrl=xxx&\nnamespace=che-namespace-name
+note right : Payload = WorkspaceRequest{Branch, StackID, Repository}        
+chestart -> chesrv : POST /api/workspace
+note right : Payload = WorkspaceConfig{projects, name, description}
+chestart <-- chesrv : Response = Workspace{status, config, links}
+wit <-- chestart
+osio <-- wit : <che_worspace_link>\nhttps://che.prod-preview/john-preview/myapp-bkvpj
+|||
+
+== open workspace by OSIO ==
+osio -> wit : POST /api/codebases/cb-1111/open/myapp-bkvpj
+wit -> chestart : PATCH /workspace/myapp-bkvpj?masterUrl=xxx&\nnamespace=che-namespace-name
+note right : Start Workspace
+wit <-- chestart : Response = Workspace{status, config, links}
+osio <-- wit : <che_worspace_link>\nhttps://che.prod-preview/john-preview/myapp-bkvpj
+osio -> cheb : start Che Browser\n<che_workspace_link>
+osio <-- cheb
+|||
+
+== open/start workspace by Che ==
+cheb -> chesrv : https://che.prod-preview/john-preview/myapp-bkvpj
+chesrv -> proxy : /api/v1/namespaces/john-preview-che\n/pods/workspacefmwa63p9ygifop5i.dockerimage
+note left : call to many OS API\n/persistentvolumeclaims\n/services\n/routes
+note right : OSO Proxy find\nOpenshift Cluster and Token\nand redirect the call
+proxy -> os
+proxy <-- os
+chesrv <-- proxy
+cheb <-- chesrv
+
+@enduml

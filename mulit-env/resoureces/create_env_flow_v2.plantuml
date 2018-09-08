@@ -1,0 +1,34 @@
+@startuml
+actor client
+
+participant "Space settings/UI" as ui
+participant "Environment Service" as es
+participant "Auth Service" as auth
+participant "Cluster Service" as cs
+participant "OSO-Proxy" as osp
+participant "OSD/OSO" as os
+
+title Create Environment Flow v2
+
+client->ui:View environments
+ui->es:GET /envs spaceID=123
+es->auth:Space admin?
+es<--auth
+ui<--es:[]env for the space\n[{id=123,name=prod,clusterURL=...},...]\n
+...
+client->ui:Create Environment
+ui->cs:GET /clusters
+ui<--cs:[]cluster for the current user
+client<--ui:Name?\nWhat cluster?
+client-->ui
+ui->osp: Get all namespaces available for user in cluster if user wants to use existing NS
+osp->os:proxy
+osp<--os
+ui<--osp:
+client<--ui:Which existing NS?\nOr create new NS automaticaly?
+client-->ui
+ui->es:POST /env {name,type,clusterURL,ns_name}
+es->auth:Space admin?
+es<--auth
+ui<--es:OK
+@enduml

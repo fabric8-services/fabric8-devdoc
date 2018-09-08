@@ -1,0 +1,35 @@
+@startuml
+
+title Pipeline View Flow - V2
+
+actor client
+
+participant "Pipeline View" as pw
+participant "Build Service" as bs
+participant "OSO Proxy" as osop
+participant "Tenant Service" as ts
+participant "Env Service" as es
+participant "Auth Service" as as
+participant "Cluster Service" as cs
+participant "OSD" as osd
+
+client->pw:Read
+pw->bs:GET
+bs->osop:GET ns-type:jenkins&w=true
+osop->ts:GET ns-type:jenkins&w=true
+ts->es:GET Clusters
+es->as:Collaborator?
+es<--as
+es->cs:GET Cluster
+es<--cs
+ts<--es:[]Cluster
+ts->osd:Provision?
+ts<--osd
+osop<--ts
+osop->osd:proxy
+osop<--osd
+bs<--osop: OS API
+pw<--bs: Builds
+client<--pw:HTML
+
+@enduml
